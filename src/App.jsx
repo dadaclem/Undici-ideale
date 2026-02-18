@@ -229,13 +229,94 @@ export default function PortafogliModello() {
   const [selectedPortfolio, setSelectedPortfolio] = useState(portfolios[0]);
   const [viewMode, setViewMode] = useState('field');
 
-  const SoccerField = () => {
-    const positions = {
-      portiere: [portfolios[0]],
-      difesa: portfolios.slice(1, 4),
-      centrocampo: portfolios.slice(4, 8),
-      attacco: portfolios.slice(8, 11)
+ const SoccerField = () => {
+    // Definizione manuale delle coordinate per ogni ID portafoglio
+    // top: 0 è la porta avversaria, 100 è la tua porta.
+    // left: 0 è fascia sinistra, 100 è fascia destra.
+    const playerPositions = {
+      1:  { top: '85%', left: '50%' },  // Portiere
+      2:  { top: '70%', left: '50%' },  // Difensore Centrale
+      3:  { top: '70%', left: '80%' },  // Terzino Destro
+      4:  { top: '70%', left: '20%' },  // Terzino Sinistro
+      5:  { top: '55%', left: '50%' },  // Mediano
+      6:  { top: '45%', left: '50%' },  // Regista
+      7:  { top: '50%', left: '80%' },  // Mezzala Destra
+      8:  { top: '50%', left: '20%' },  // Mezzala Sinistra
+      9:  { top: '25%', left: '80%' },  // Ala Destra
+      10: { top: '25%', left: '20%' },  // Ala Sinistra
+      11: { top: '15%', left: '50%' }   // Centravanti
     };
+
+    const PlayerCard = ({ portfolio }) => {
+      const pos = playerPositions[portfolio.id];
+      return (
+        <div
+          onClick={() => setSelectedPortfolio(portfolio)}
+          style={{ 
+            position: 'absolute', 
+            top: pos.top, 
+            left: pos.left, 
+            transform: 'translate(-50%, -50%)' 
+          }}
+          className={`cursor-pointer rounded-lg border-2 bg-white/95 p-1 shadow-lg transition-all hover:scale-110 hover:z-20 ${
+            selectedPortfolio.id === portfolio.id ? 'border-yellow-400 ring-2 ring-yellow-400' : 'border-blue-500'
+          } w-24 md:w-28`}
+        >
+          <div className="text-center">
+            <div className="text-[10px] font-bold text-blue-600 leading-none">
+              {portfolio.positionNumber}
+            </div>
+            <div className="text-[8px] font-semibold text-gray-500 uppercase leading-none mb-1">
+              {portfolio.position}
+            </div>
+          </div>
+          <div className="h-10 w-full overflow-hidden">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={portfolio.allocation}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={8}
+                  outerRadius={18}
+                  paddingAngle={2}
+                  dataKey="value"
+                >
+                  {portfolio.allocation.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="mt-1 text-[9px] text-center font-black leading-tight text-gray-900 uppercase tracking-tighter">
+            {portfolio.name}
+          </div>
+        </div>
+      );
+    };
+
+    return (
+      <div className="relative mx-auto w-full max-w-2xl aspect-[2/3] rounded-xl bg-gradient-to-b from-green-600 to-green-800 p-4 shadow-2xl border-4 border-white/20 overflow-hidden">
+        {/* Marcature del campo */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-1/2 top-0 h-full w-0.5 bg-white/30 -translate-x-1/2"></div>
+          <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/30"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-20 border-b-2 border-x-2 border-white/30"></div>
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-20 border-t-2 border-x-2 border-white/30"></div>
+        </div>
+
+        {/* Rendering di tutti i giocatori in base alle posizioni sopra */}
+        {portfolios.map((p) => (
+          <PlayerCard key={p.id} portfolio={p} />
+        ))}
+
+        <div className="absolute bottom-2 right-4 text-[10px] font-bold text-white/50 italic">
+          STRATEGIA 3-4-3
+        </div>
+      </div>
+    );
+  };
 
     const PlayerCard = ({ portfolio, size = 'normal' }) => (
       <div
