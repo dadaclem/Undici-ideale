@@ -21,7 +21,6 @@ const portfolios = [
   {
     id: 1,
     category: 'PORTIERE',
-    position: 'Portiere',
     positionNumber: 1,
     name: 'Sotto il materasso',
     subtitle: 'Estremo difensore - massima protezione',
@@ -39,7 +38,6 @@ const portfolios = [
   {
     id: 2,
     category: 'DIFESA',
-    position: 'Difensore Centrale',
     positionNumber: 2,
     name: 'Io ce li ho sul libretto',
     subtitle: 'Zero pensieri, massima semplicità',
@@ -56,7 +54,6 @@ const portfolios = [
   {
     id: 3,
     category: 'DIFESA',
-    position: 'Terzino Destro',
     positionNumber: 3,
     name: 'Ma io veramente avrei comprato una casa',
     subtitle: 'Flussi di cassa regolari, sostituto del mattone',
@@ -73,7 +70,6 @@ const portfolios = [
   {
     id: 4,
     category: 'DIFESA',
-    position: 'Terzino Sinistro',
     positionNumber: 4,
     name: 'Non ci sono più le mezze stagioni',
     subtitle: 'All Weather v2.1 - protezione ogni scenario macro',
@@ -94,7 +90,6 @@ const portfolios = [
   {
     id: 5,
     category: 'CENTROCAMPO',
-    position: 'Mediano',
     positionNumber: 5,
     name: 'Una vita da mediano',
     subtitle: 'All-Weather moderno v2.2 - Il mediano corazzato',
@@ -115,7 +110,6 @@ const portfolios = [
   {
     id: 6,
     category: 'CENTROCAMPO',
-    position: 'Regista',
     positionNumber: 6,
     name: 'Chissà se ci andremo mai',
     subtitle: 'Accumulo pensionistico 20-40 anni con de-risking automatico',
@@ -135,7 +129,6 @@ const portfolios = [
   {
     id: 7,
     category: 'CENTROCAMPO',
-    position: 'Mezzala',
     positionNumber: 7,
     name: "Un po' cicala e un po' formica",
     subtitle: 'Risparmio flessibile, possibili prelievi 3-10 anni',
@@ -152,7 +145,6 @@ const portfolios = [
   {
     id: 8,
     category: 'CENTROCAMPO',
-    position: 'Trequartista',
     positionNumber: 8,
     name: "L'ombrellone",
     subtitle: 'De-cumulo pianificato per godersi il presente',
@@ -171,7 +163,6 @@ const portfolios = [
   {
     id: 9,
     category: 'ATTACCO',
-    position: 'Ala Destra',
     positionNumber: 9,
     name: 'Il fenomeno',
     subtitle: 'Ricerca alpha attraverso fattori accademici',
@@ -191,7 +182,6 @@ const portfolios = [
   {
     id: 10,
     category: 'ATTACCO',
-    position: 'Ala Sinistra',
     positionNumber: 10,
     name: 'Voglia di lavorare',
     subtitle: 'Cash flow perpetuo, pensionamento anticipato',
@@ -210,7 +200,6 @@ const portfolios = [
   {
     id: 11,
     category: 'ATTACCO',
-    position: 'Centravanti',
     positionNumber: 11,
     name: "Cent'anni",
     subtitle: 'Massimizzazione patrimonio eredità, buy & hold purista',
