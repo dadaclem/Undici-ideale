@@ -21,6 +21,7 @@ const portfolios = [
   {
     id: 1,
     category: 'PORTIERE',
+    position: 'Portiere',
     positionNumber: 1,
     name: 'Sotto il materasso',
     subtitle: 'Estremo difensore - massima protezione',
@@ -38,6 +39,7 @@ const portfolios = [
   {
     id: 2,
     category: 'DIFESA',
+    position: 'Difensore Centrale',
     positionNumber: 2,
     name: 'Io ce li ho sul libretto',
     subtitle: 'Zero pensieri, massima semplicità',
@@ -54,6 +56,7 @@ const portfolios = [
   {
     id: 3,
     category: 'DIFESA',
+    position: 'Terzino Destro',
     positionNumber: 3,
     name: 'Ma io veramente avrei comprato una casa',
     subtitle: 'Flussi di cassa regolari, sostituto del mattone',
@@ -70,29 +73,10 @@ const portfolios = [
   {
     id: 4,
     category: 'DIFESA',
+    position: 'Terzino Sinistro',
     positionNumber: 4,
     name: 'Non ci sono più le mezze stagioni',
-    subtitle: 'All Weather v2.1 - protezione ogni scenario macro',
-    allocation: [
-      { name: 'Bond Lunghi 20-25Y', value: 20, color: COLORS.bondLong },
-      { name: 'Bond Corti 1-3Y', value: 20, color: COLORS.bonds },
-      { name: 'Azionario Globale', value: 30, color: COLORS.stocks },
-      { name: 'Bond Intermedi 5-7Y', value: 5, color: COLORS.bonds },
-      { name: 'Commodities', value: 10, color: COLORS.commodities },
-      { name: 'Oro', value: 15, color: COLORS.gold }
-    ],
-    versionePigra: '80% Vanguard LifeStrategy 40% + 20% Commodities (approssimativo)',
-    rendimento: '5-7% annuo',
-    volatilita: 'Media (~7-9% annua)',
-    orizzonte: '10-20 anni',
-    note: 'Equilibrio totale. Funziona in ogni regime economico: crescita, recessione, inflazione, deflazione. Versione 2.1 con oro 15% per maggiore protezione crisi sistemiche.'
-  },
-  {
-    id: 5,
-    category: 'CENTROCAMPO',
-    positionNumber: 5,
-    name: 'Una vita da mediano',
-    subtitle: 'All-Weather moderno v2.2 - Il mediano corazzato',
+    subtitle: 'All Weather v2.2 - Il mediano corazzato definitivo',
     allocation: [
       { name: 'World Quality (IWQU)', value: 30, color: COLORS.quality },
       { name: 'Bond Lunghi 20-30Y', value: 20, color: COLORS.bondLong },
@@ -101,15 +85,36 @@ const portfolios = [
       { name: 'Commodities', value: 10, color: COLORS.commodities },
       { name: 'REITs', value: 5, color: COLORS.reit }
     ],
-    versionePigra: 'iShares World Quality + iShares Global Aggregate Bond + Oro + Commodities',
-    rendimento: '5-6% annuo',
+    versionePigra: '80% Vanguard LifeStrategy 40% + 20% Commodities (approssimativo)',
+    rendimento: '5-7% annuo',
     volatilita: 'Media (~9-11% annua)',
     orizzonte: '10-20 anni',
-    note: 'v2.2 Definitive: Barbell bonds puro (20% lunghi + 20% corti, zero intermedi). World Quality per crescita resiliente. Hard assets 30% (oro 15% + commodities 10% + REIT 5%) = corazza reale contro inflazione.'
+    note: 'v2.2 Barbell + Gold Heavy: Barbell bonds puro (20% lunghi + 20% corti, ZERO intermedi). Quality per crescita resiliente. Hard assets 30% (15% oro + 10% commodities + 5% REIT) = corazza reale contro inflazione.'
+  },
+  {
+    id: 5,
+    category: 'CENTROCAMPO',
+    position: 'Mediano',
+    positionNumber: 5,
+    name: 'Una vita da mediano',
+    subtitle: 'Conservativo ma non immobile - 40/50/10',
+    allocation: [
+      { name: 'World Quality', value: 20, color: COLORS.quality },
+      { name: 'Dividend Aristocrats Acc', value: 20, color: COLORS.dividends },
+      { name: 'Bond Corti 1-3Y', value: 30, color: COLORS.bonds },
+      { name: 'Bond Intermedi 5-7Y', value: 20, color: COLORS.bonds },
+      { name: 'Oro', value: 10, color: COLORS.gold }
+    ],
+    versionePigra: 'iShares World Quality + iShares Global Aggregate Bond + Oro',
+    rendimento: '4-5% annuo',
+    volatilita: 'Bassa-media (~8-10% annua)',
+    orizzonte: '5-15 anni',
+    note: 'Il ponte tra difesa e centrocampo. Quality + Dividend per crescita difensiva, barbell bonds (30% corti + 20% intermedi) per flessibilità, oro 10% per protezione.'
   },
   {
     id: 6,
     category: 'CENTROCAMPO',
+    position: 'Regista',
     positionNumber: 6,
     name: 'Chissà se ci andremo mai',
     subtitle: 'Accumulo pensionistico 20-40 anni con de-risking automatico',
@@ -129,6 +134,7 @@ const portfolios = [
   {
     id: 7,
     category: 'CENTROCAMPO',
+    position: 'Mezzala',
     positionNumber: 7,
     name: "Un po' cicala e un po' formica",
     subtitle: 'Risparmio flessibile, possibili prelievi 3-10 anni',
@@ -145,6 +151,7 @@ const portfolios = [
   {
     id: 8,
     category: 'CENTROCAMPO',
+    position: 'Trequartista',
     positionNumber: 8,
     name: "L'ombrellone",
     subtitle: 'De-cumulo pianificato per godersi il presente',
@@ -163,6 +170,7 @@ const portfolios = [
   {
     id: 9,
     category: 'ATTACCO',
+    position: 'Ala Destra',
     positionNumber: 9,
     name: 'Il fenomeno',
     subtitle: 'Ricerca alpha attraverso fattori accademici',
@@ -182,6 +190,7 @@ const portfolios = [
   {
     id: 10,
     category: 'ATTACCO',
+    position: 'Ala Sinistra',
     positionNumber: 10,
     name: 'Voglia di lavorare',
     subtitle: 'Cash flow perpetuo, pensionamento anticipato',
@@ -200,6 +209,7 @@ const portfolios = [
   {
     id: 11,
     category: 'ATTACCO',
+    position: 'Centravanti',
     positionNumber: 11,
     name: "Cent'anni",
     subtitle: 'Massimizzazione patrimonio eredità, buy & hold purista',
