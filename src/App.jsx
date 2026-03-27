@@ -1,88 +1,87 @@
 if (!disclaimerAccepted) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl flex flex-col" style={{ maxHeight: '85vh' }}>
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.8)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '20px',
+      zIndex: 9999
+    }}>
+      <div style={{
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        maxWidth: '600px',
+        width: '100%',
+        maxHeight: '90vh',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         
-        {/* Header fisso */}
-        <div className="bg-amber-500 text-white p-4 rounded-t-lg flex-shrink-0">
-          <h2 className="text-xl font-bold">⚠️ Informativa Importante</h2>
-          <p className="text-sm mt-1">Prima di accedere, leggi attentamente</p>
+        {/* Header */}
+        <div style={{
+          backgroundColor: '#f59e0b',
+          color: 'white',
+          padding: '20px',
+          borderTopLeftRadius: '12px',
+          borderTopRightRadius: '12px'
+        }}>
+          <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
+            ⚠️ Informativa Importante
+          </h2>
         </div>
 
         {/* Contenuto scrollabile */}
         <div 
-          className="p-6 overflow-y-auto flex-1"
           onScroll={handleScroll}
-          style={{ minHeight: '200px', maxHeight: 'calc(85vh - 180px)' }}
+          style={{
+            padding: '20px',
+            overflowY: 'auto',
+            flex: 1,
+            fontSize: '14px',
+            lineHeight: '1.6'
+          }}
         >
-          <h3 className="font-bold text-lg mb-3">Disclaimer Legale Marzo 2026</h3>
-          
-          <div className="space-y-3 text-sm">
-            <p>
-              <strong>Finalità didattica:</strong> I contenuti hanno esclusivo scopo informativo 
-              ed educativo. Non costituiscono consulenza finanziaria personalizzata.
-            </p>
-
-            <p>
-              <strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente 
-              autorizzato. Non gestiamo capitali né riceviamo commissioni.
-            </p>
-
-            <p>
-              <strong>Portafogli teorici:</strong> Le allocazioni sono esempi didattici che 
-              non tengono conto della tua situazione personale.
-            </p>
-
-            <p>
-              <strong>Rendimenti ipotetici:</strong> Stime basate su dati storici. 
-              I rendimenti passati non garantiscono risultati futuri.
-            </p>
-
-            <p>
-              <strong>Conformità volontaria:</strong> Pessoa si allinea alle Linee Guida 
-              ESMA-Consob gennaio 2026.
-            </p>
-
-            <p>
-              <strong>Responsabilità:</strong> L'utente è responsabile delle proprie decisioni. 
-              Pessoa non risponde di eventuali perdite.
-            </p>
-
-            <p>
-              <strong>Raccomandazione:</strong> Consulta un professionista abilitato prima 
-              di investire.
-            </p>
-
-            <p className="text-xs text-gray-500 italic mt-4">
-              📜 Scorri fino in fondo per abilitare il pulsante
-            </p>
-          </div>
+          <p><strong>Finalità didattica:</strong> Scopo informativo ed educativo. Non costituisce consulenza.</p>
+          <p><strong>Nessuna attività regolamentata:</strong> Pessoa non è consulente autorizzato.</p>
+          <p><strong>Portafogli teorici:</strong> Esempi didattici generici.</p>
+          <p><strong>Rendimenti ipotetici:</strong> Non garantiscono risultati futuri.</p>
+          <p><strong>Responsabilità:</strong> L'utente decide autonomamente.</p>
+          <p style={{ marginTop: '20px', fontSize: '12px', color: '#666' }}>
+            Scorri fino in fondo per procedere ↓
+          </p>
         </div>
 
-        {/* Footer fisso con pulsante */}
-        <div className="border-t bg-gray-50 p-4 rounded-b-lg flex-shrink-0">
+        {/* Pulsante */}
+        <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
           <button
             onClick={acceptDisclaimer}
             disabled={!canAccept}
-            className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all ${
-              canAccept
-                ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg'
-                : 'bg-gray-300 text-gray-500'
-            }`}
+            style={{
+              width: '100%',
+              padding: '16px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              borderRadius: '8px',
+              border: 'none',
+              backgroundColor: canAccept ? '#16a34a' : '#d1d5db',
+              color: canAccept ? 'white' : '#6b7280',
+              cursor: canAccept ? 'pointer' : 'not-allowed'
+            }}
           >
-            {canAccept ? '✓ Ho letto e prendo visione' : '↓ Scorri per abilitare'}
+            {canAccept ? '✓ Ho letto e accetto' : 'Scorri per abilitare'}
           </button>
-          
-          <p className="text-xs text-center text-gray-500 mt-2">
-            {canAccept 
-              ? 'Clicca per accedere ai portafogli' 
-              : 'Leggi tutto il testo per procedere'}
-          </p>
         </div>
 
       </div>
     </div>
   );
+}
 }import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
