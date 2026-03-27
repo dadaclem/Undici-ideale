@@ -1,116 +1,4 @@
-   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-teal-500 to-green-600 text-white p-6 rounded-t-lg">
-            <h2 className="text-2xl font-bold">⚠️ Informativa Importante</h2>
-            <p className="text-sm mt-2 opacity-90">
-              Prima di accedere ai portafogli modello, ti preghiamo di leggere attentamente
-            </p>
-          </div>
-
-          {/* Scrollable Content */}
-          <div 
-            className="p-6 overflow-y-auto flex-1 text-sm leading-relaxed"
-            onScroll={handleScroll}
-          >
-            <h3 className="font-bold text-lg mb-3 text-gray-800">Disclaimer Legale</h3>
-            
-            <div className="space-y-4 text-gray-700">
-              <p>
-                <strong>Finalità didattica ed educativa:</strong> I contenuti presentati in questa applicazione 
-                hanno esclusivamente scopo informativo ed educativo nell'ambito dell'educazione finanziaria. 
-                Non costituiscono in alcun modo consulenza finanziaria personalizzata, sollecitazione 
-                all'investimento o raccomandazione di prodotti finanziari specifici.
-              </p>
-
-              <p>
-                <strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente finanziario 
-                autorizzato né presta servizi di investimento ai sensi del D.Lgs 58/1998 (TUF). 
-                Non gestiamo capitali, non riceviamo commissioni da intermediari e non abbiamo conflitti 
-                di interesse nella presentazione dei portafogli modello.
-              </p>
-
-              <p>
-                <strong>Portafogli modello teorici:</strong> Le allocazioni presentate sono esempi didattici 
-                a scopo illustrativo. Non tengono conto della tua situazione finanziaria personale, 
-                obiettivi, propensione al rischio, orizzonte temporale o vincoli specifici.
-              </p>
-
-              <p>
-                <strong>Rendimenti ipotetici:</strong> I rendimenti indicati sono stime basate su dati 
-                storici e proiezioni teoriche. I rendimenti passati non sono indicativi di quelli futuri. 
-                Ogni investimento comporta rischi, inclusa la possibile perdita totale o parziale del capitale.
-              </p>
-
-              <p>
-                <strong>Conformità volontaria:</strong> Pessoa si allinea volontariamente alle Linee Guida 
-                ESMA-Consob gennaio 2026 sulla comunicazione finanziaria,pur non essendo soggetto agli obblighi 
-                di legge previsti per gli intermediari autorizzati.
-              </p>
-
-              <p>
-                <strong>Responsabilità:</strong> L'utente è l'unico responsabile delle decisioni di investimento 
-                assunte. Pessoa non può essere ritenuta responsabile per eventuali perdite derivanti 
-                dall'utilizzo delle informazioni contenute in questa applicazione.
-              </p>
-
-              <p>
-                <strong>Raccomandazione:</strong> Prima di effettuare qualsiasi investimento, consulta un 
-                consulente finanziario abilitato che possa valutare la tua situazione specifica. Leggi sempre 
-                con attenzione la documentazione informativa degli strumenti finanziari (KIID, prospetto).
-              </p>
-
-              <p className="text-xs text-gray-500 mt-6">
-                Ultimo aggiornamento: Marzo 2026
-              </p>
-            </div>
-          </div>
-
-          {/* Footer con bottone */}
-          <div className="border-t p-6 bg-gray-50 rounded-b-lg">
-            <div className="flex items-start space-x-3 mb-4">
-              <input 
-                type="checkbox" 
-                id="confirm-read"
-                className="mt-1"
-                checked={canAccept}
-                disabled
-              />
-              <label htmlFor="confirm-read" className="text-sm text-gray-600">
-                {canAccept 
-                  ? "✓ Hai letto l'informativa completa" 
-                  : "Scorri fino in fondo per abilitare il pulsante"}
-              </label>
-            </div>
-            
-            <button
-              onClick={acceptDisclaimer}
-              disabled={!canAccept}
-              className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
-                canAccept
-                  ? 'bg-green-600 hover:bg-green-700 text-white cursor-pointer'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {canAccept ? 'Ho letto e prendo visione' : 'Leggi l\'informativa completa'}
-            </button>
-            
-            <p className="text-xs text-center text-gray-500 mt-3">
-              Cliccando confermi di aver letto e compreso l'informativa
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Resto della tua app (portafogli)
-  return (
-    <div>
-      {/* Tua app normale qui */}
-    </div>
-  );
-}import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const COLORS = {
@@ -471,4 +359,208 @@ export default function PortafogliModello() {
 
       <div className="mt-2 space-y-1 text-xs">
         <div><strong>Rendimento:</strong> {portfolio.rendimento}</div>
-        <div><strong>Volatilità:</stron
+        <div><strong>Volatilità:</strong> {portfolio.volatilita}</div>
+      </div>
+    </div>
+  );
+
+  const DetailView = ({ portfolio }) => (
+    <div className="rounded-lg border-2 border-blue-500 bg-white p-6">
+      <div className="mb-4">
+        <span className="text-sm font-semibold text-blue-600">
+          {portfolio.category} - {portfolio.position} #{portfolio.positionNumber}
+        </span>
+        <h2 className="text-2xl font-bold text-gray-900">{portfolio.name}</h2>
+        <p className="text-gray-600">{portfolio.subtitle}</p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div>
+          <h3 className="mb-3 text-lg font-semibold">Allocazione Asset</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={portfolio.allocation}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, value }) => `${name}: ${value}%`}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {portfolio.allocation.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div>
+          <h3 className="mb-3 text-lg font-semibold">Composizione</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={portfolio.allocation} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" domain={[0, 100]} />
+              <YAxis dataKey="name" type="category" width={150} />
+              <Tooltip />
+              <Bar dataKey="value" fill="#3b82f6">
+                {portfolio.allocation.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-lg bg-gray-50 p-4">
+          <h4 className="mb-2 font-semibold text-gray-700">Caratteristiche</h4>
+          <ul className="space-y-2 text-sm">
+            <li><strong>Rendimento atteso:</strong> {portfolio.rendimento}</li>
+            <li><strong>Volatilità:</strong> {portfolio.volatilita}</li>
+            <li><strong>Orizzonte:</strong> {portfolio.orizzonte}</li>
+            {portfolio.versionePigra && (
+              <li><strong>Versione pigra:</strong> {portfolio.versionePigra}</li>
+            )}
+          </ul>
+        </div>
+
+        {portfolio.note && (
+          <div className="rounded-lg bg-yellow-50 p-4">
+            <h4 className="mb-2 font-semibold text-yellow-800">Note</h4>
+            <p className="text-sm text-yellow-900">{portfolio.note}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const categories = ['PORTIERE', 'DIFESA', 'CENTROCAMPO', 'ATTACCO'];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8 text-center">
+          <h1 className="mb-2 text-4xl font-bold text-gray-900">⚽ Portafogli Modello</h1>
+          <p className="text-lg text-gray-600">La tua squadra di investimenti - Formazione 3-4-3</p>
+          <p className="mt-2 text-xs text-gray-500">
+            Finalità illustrativa - Non costituisce consulenza personalizzata
+          </p>
+        </div>
+
+        <div className="mb-6 flex justify-center gap-4">
+          <button
+            onClick={() => setViewMode('field')}
+            className={`rounded-lg px-4 py-2 font-semibold transition-colors ${
+              viewMode === 'field' ? 'bg-green-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            ⚽ Campo da Calcio
+          </button>
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`rounded-lg px-4 py-2 font-semibold transition-colors ${
+              viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            📊 Vista Griglia
+          </button>
+          <button
+            onClick={() => setViewMode('detail')}
+            className={`rounded-lg px-4 py-2 font-semibold transition-colors ${
+              viewMode === 'detail' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            🔍 Vista Dettaglio
+          </button>
+        </div>
+
+        {viewMode === 'field' ? (
+          <div className="space-y-6">
+            <SoccerField />
+            <DetailView portfolio={selectedPortfolio} />
+          </div>
+        ) : viewMode === 'grid' ? (
+          <div className="space-y-8">
+            {categories.map((category) => (
+              <div key={category}>
+                <h2 className="mb-4 text-2xl font-bold text-gray-800">{category}</h2>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {portfolios
+                    .filter((p) => p.category === category)
+                    .map((portfolio) => (
+                      <PortfolioCard key={portfolio.id} portfolio={portfolio} />
+                    ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {portfolios.map((portfolio) => (
+                <button
+                  key={portfolio.id}
+                  onClick={() => setSelectedPortfolio(portfolio)}
+                  className={`whitespace-nowrap rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+                    selectedPortfolio.id === portfolio.id
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  {portfolio.positionNumber}. {portfolio.name}
+                </button>
+              ))}
+            </div>
+            <DetailView portfolio={selectedPortfolio} />
+          </div>
+        )}
+
+        <div className="mt-8 space-y-4 rounded-lg bg-white p-6 text-sm text-gray-600">
+          <div>
+            <h3 className="mb-3 font-semibold text-gray-800">Disclaimer</h3>
+            <p>
+              I rendimenti storici citati sono calcolati su serie storiche pubbliche e non costituiscono garanzia
+              di risultati futuri. I modelli presentati hanno finalità didattica e illustrativa. L'investitore è
+              responsabile della propria asset allocation e della selezione degli strumenti finanziari.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="mb-3 font-semibold text-gray-800">Note Metodologiche</h3>
+            
+            <div className="mb-3">
+              <h4 className="font-semibold text-gray-700">¹ Perché bond a breve scadenza (3-5 anni) e non inflation-linked?</h4>
+              <p className="mt-1">
+                Gli inflation-linked bonds (TIPS europei) presentano svantaggi significativi per investitori italiani: 
+                (1) <strong>Tassazione penalizzante</strong> - si paga il 26% sia sul coupon reale che sull'aggiustamento inflazione annuale, 
+                erodendo il vantaggio; (2) <strong>Rendimento reale più basso</strong> - se l'inflazione resta moderata, 
+                il rendimento totale è inferiore ai bond nominali; (3) <strong>Maggiore volatilità</strong> - i prezzi si muovono 
+                in base alle aspettative di inflazione futura; (4) <strong>Duration più lunga</strong> - tipicamente 7-15 anni 
+                vs 3-5 anni dei bond corti. Per protezione inflazione reale preferiamo commodities, oro e REIT nei portafogli 
+                che lo richiedono (es. "Non ci sono più le mezze stagioni").
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-gray-700">² Perché bond lunghi (20-25 anni) nel portafoglio "Non ci sono più le mezze stagioni"?</h4>
+              <p className="mt-1">
+                I bond lunghi proteggono efficacemente dalla <strong>deflazione e dalle recessioni</strong>. 
+                Durante deflazione il valore reale dei pagamenti fissi aumenta, e le banche centrali tagliano i tassi 
+                verso zero. I bond lunghi beneficiano massimamente dal calo tassi grazie alla loro alta duration 
+                (~20 vs ~4 dei bond corti): un calo dell'1% nei tassi genera +20% di apprezzamento vs +4% dei bond corti. 
+                Questo effetto è stato evidente in Giappone (1990-2020) e durante la crisi 2008-2009 (bond lunghi USA +25% 
+                mentre azioni -22%). Nel portafoglio All Weather, i bond lunghi sono la protezione specifica per scenari 
+                deflazionistici/recessivi, mentre commodities e oro proteggono dall'inflazione.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
