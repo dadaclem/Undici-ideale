@@ -1,32 +1,4 @@
-import { useState, useEffect } from 'react';
-
-function App() {
-  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
-  const [canAccept, setCanAccept] = useState(false);
-
-  useEffect(() => {
-    // Controlla se già accettato in passato
-    const accepted = localStorage.getItem('pessoa-disclaimer-accepted');
-    if (accepted === 'true') {
-      setDisclaimerAccepted(true);
-    }
-  }, []);
-
-  const handleScroll = (e) => {
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) {
-      setCanAccept(true); // Abilita bottone solo dopo scroll completo
-    }
-  };
-
-  const acceptDisclaimer = () => {
-    localStorage.setItem('pessoa-disclaimer-accepted', 'true');
-    setDisclaimerAccepted(true);
-  };
-
-  if (!disclaimerAccepted) {
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-teal-500 to-green-600 text-white p-6 rounded-t-lg">
