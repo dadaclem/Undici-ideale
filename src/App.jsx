@@ -87,4 +87,103 @@ function App() {
     );
 
     return (
-      <div className="relative mx-auto w-full max-w-4xl rounded-xl bg-gradient-to-b from-green-6
+      <div className="relative mx-auto w-full max-w-4xl rounded-xl bg-gradient-to-b from-green-600 to-green-800 p-8 shadow-2xl border-4 border-white/30">
+        <div className="relative space-y-8">
+          <div className="flex justify-center"><PlayerCard portfolio={portiere[0]} /></div>
+          <div className="flex justify-around">{difesa.map(p => <PlayerCard key={p.id} portfolio={p} size="small" />)}</div>
+          <div className="grid grid-cols-4 gap-2">{centrocampo.map(p => <div key={p.id} className="flex justify-center"><PlayerCard portfolio={p} size="small" /></div>)}</div>
+          <div className="flex justify-around">{attacco.map(p => <PlayerCard key={p.id} portfolio={p} size="small" />)}</div>
+        </div>
+      </div>
+    );
+  };
+
+  const DetailView = ({ portfolio }) => (
+    <div className="mt-8 rounded-xl border-2 border-blue-500 bg-white p-6 shadow-xl">
+      <h2 className="text-2xl font-bold text-gray-900">{portfolio.name}</h2>
+      <p className="text-blue-600 font-semibold mb-4 uppercase text-sm tracking-widest">{portfolio.subtitle}</p>
+      <div className="grid md:grid-cols-2 gap-8">
+        <div className="h-64">
+           <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie data={portfolio.allocation} cx="50%" cy="50%" outerRadius={80} label={({name, value}) => `${name} ${value}%`} dataKey="value">
+                {portfolio.allocation.map((entry, index) => <Cell key={index} fill={entry.color} />)}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="bg-gray-50 p-6 rounded-lg space-y-3 border border-gray-100 text-sm">
+          <p><strong>📊 Rendimento:</strong> {portfolio.rendimento}</p>
+          <p><strong>📉 Volatilità:</strong> {portfolio.volatilita}</p>
+          <p><strong>⏳ Orizzonte:</strong> {portfolio.orizzonte || 'Lungo termine'}</p>
+          <p className="pt-4 border-t italic text-gray-600">"{portfolio.note}"</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (!disclaimerAccepted) {
+    return (
+      <div className="fixed inset-0 bg-slate-900/90 flex items-center justify-center z-50 p-4 backdrop-blur-md">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col overflow-hidden">
+          <div className="bg-teal-600 text-white p-6 text-center">
+            <h2 className="text-2xl font-bold">⚠️ Informativa PESSOA</h2>
+            <p className="text-xs opacity-80 uppercase tracking-widest mt-1">Conformità ESMA 2026</p>
+          </div>
+          <div className="p-8 overflow-y-auto max-h-[50vh] text-sm leading-relaxed text-gray-600 space-y-4" onScroll={handleScroll}>
+            <p className="font-bold text-gray-800 underline">Disclaimer Legale Marzo 2026</p>
+            <p><strong>Finalità didattica:</strong> I contenuti hanno scopo informativo ed educativo. Non costituiscono consulenza finanziaria.</p>
+            <p><strong>Rendimenti:</strong> I rendimenti passati non garantiscono quelli futuri. Ogni investimento comporta il rischio di perdita del capitale.</p>
+            <p className="text-xs italic text-gray-400">Questo portale è parte del progetto di educazione finanziaria PESSOA.</p>
+          </div>
+          <div className="p-6 bg-slate-50 border-t border-slate-200">
+             <button
+              onClick={acceptDisclaimer}
+              disabled={!canAccept}
+              className={`w-full py-4 rounded-xl font-bold transition-all ${
+                canAccept ? 'bg-emerald-600 text-white shadow-lg' : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              {canAccept ? 'ACCETTO E PROSEGUO' : `SCORRI O ATTENDI ${secondsLeft}s`}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-6 font-sans">
+      <div className="max-w-6xl mx-auto">
+        <header className="text-center mb-10">
+          <h1 className="text-6xl font-black text-gray-900 uppercase tracking-tighter italic">Pessoa</h1>
+          <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">Labyrinth Strategy | Portafogli Modello 3-4-3</p>
+        </header>
+
+        <div className="flex justify-center gap-2 mb-8 bg-white p-1 rounded-full shadow-sm max-w-xs mx-auto">
+           <button onClick={() => setViewMode('field')} className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${viewMode === 'field' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-400'}`}>CAMPO</button>
+           <button onClick={() => setViewMode('grid')} className={`flex-1 py-2 rounded-full text-xs font-bold transition-all ${viewMode === 'grid' ? 'bg-blue-600 text-white shadow-md' : 'text-gray-400'}`}>LISTA</button>
+        </div>
+
+        {viewMode === 'field' ? (
+          <div className="animate-in fade-in duration-500">
+            <SoccerField />
+            <DetailView portfolio={selectedPortfolio} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {portfolios.map(p => (
+              <div key={p.id} onClick={() => {setSelectedPortfolio(p); setViewMode('field');}} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-400 cursor-pointer transition-all hover:shadow-md">
+                <span className="text-[10px] font-bold text-blue-500 uppercase">{p.category}</span>
+                <h3 className="font-bold text-gray-800">{p.positionNumber}. {p.name}</h3>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
