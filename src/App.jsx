@@ -1,4 +1,144 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+function App() {
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
+  const [canAccept, setCanAccept] = useState(false);
+
+  useEffect(() => {
+    // Controlla se già accettato in passato
+    const accepted = localStorage.getItem('pessoa-disclaimer-accepted');
+    if (accepted === 'true') {
+      setDisclaimerAccepted(true);
+    }
+  }, []);
+
+  const handleScroll = (e) => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      setCanAccept(true); // Abilita bottone solo dopo scroll completo
+    }
+  };
+
+  const acceptDisclaimer = () => {
+    localStorage.setItem('pessoa-disclaimer-accepted', 'true');
+    setDisclaimerAccepted(true);
+  };
+
+  if (!disclaimerAccepted) {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-teal-500 to-green-600 text-white p-6 rounded-t-lg">
+            <h2 className="text-2xl font-bold">⚠️ Informativa Importante</h2>
+            <p className="text-sm mt-2 opacity-90">
+              Prima di accedere ai portafogli modello, ti preghiamo di leggere attentamente
+            </p>
+          </div>
+
+          {/* Scrollable Content */}
+          <div 
+            className="p-6 overflow-y-auto flex-1 text-sm leading-relaxed"
+            onScroll={handleScroll}
+          >
+            <h3 className="font-bold text-lg mb-3 text-gray-800">Disclaimer Legale</h3>
+            
+            <div className="space-y-4 text-gray-700">
+              <p>
+                <strong>Finalità didattica ed educativa:</strong> I contenuti presentati in questa applicazione 
+                hanno esclusivamente scopo informativo ed educativo nell'ambito dell'educazione finanziaria. 
+                Non costituiscono in alcun modo consulenza finanziaria personalizzata, sollecitazione 
+                all'investimento o raccomandazione di prodotti finanziari specifici.
+              </p>
+
+              <p>
+                <strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente finanziario 
+                autorizzato né presta servizi di investimento ai sensi del D.Lgs 58/1998 (TUF). 
+                Non gestiamo capitali, non riceviamo commissioni da intermediari e non abbiamo conflitti 
+                di interesse nella presentazione dei portafogli modello.
+              </p>
+
+              <p>
+                <strong>Portafogli modello teorici:</strong> Le allocazioni presentate sono esempi didattici 
+                a scopo illustrativo. Non tengono conto della tua situazione finanziaria personale, 
+                obiettivi, propensione al rischio, orizzonte temporale o vincoli specifici.
+              </p>
+
+              <p>
+                <strong>Rendimenti ipotetici:</strong> I rendimenti indicati sono stime basate su dati 
+                storici e proiezioni teoriche. I rendimenti passati non sono indicativi di quelli futuri. 
+                Ogni investimento comporta rischi, inclusa la possibile perdita totale o parziale del capitale.
+              </p>
+
+              <p>
+                <strong>Conformità volontaria:</strong> Pessoa si allinea volontariamente alle Linee Guida 
+                ESMA-Consob gennaio 2026 sulla comunicazione finanziaria,pur non essendo soggetto agli obblighi 
+                di legge previsti per gli intermediari autorizzati.
+              </p>
+
+              <p>
+                <strong>Responsabilità:</strong> L'utente è l'unico responsabile delle decisioni di investimento 
+                assunte. Pessoa non può essere ritenuta responsabile per eventuali perdite derivanti 
+                dall'utilizzo delle informazioni contenute in questa applicazione.
+              </p>
+
+              <p>
+                <strong>Raccomandazione:</strong> Prima di effettuare qualsiasi investimento, consulta un 
+                consulente finanziario abilitato che possa valutare la tua situazione specifica. Leggi sempre 
+                con attenzione la documentazione informativa degli strumenti finanziari (KIID, prospetto).
+              </p>
+
+              <p className="text-xs text-gray-500 mt-6">
+                Ultimo aggiornamento: Marzo 2026
+              </p>
+            </div>
+          </div>
+
+          {/* Footer con bottone */}
+          <div className="border-t p-6 bg-gray-50 rounded-b-lg">
+            <div className="flex items-start space-x-3 mb-4">
+              <input 
+                type="checkbox" 
+                id="confirm-read"
+                className="mt-1"
+                checked={canAccept}
+                disabled
+              />
+              <label htmlFor="confirm-read" className="text-sm text-gray-600">
+                {canAccept 
+                  ? "✓ Hai letto l'informativa completa" 
+                  : "Scorri fino in fondo per abilitare il pulsante"}
+              </label>
+            </div>
+            
+            <button
+              onClick={acceptDisclaimer}
+              disabled={!canAccept}
+              className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
+                canAccept
+                  ? 'bg-green-600 hover:bg-green-700 text-white cursor-pointer'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              {canAccept ? 'Ho letto e prendo visione' : 'Leggi l\'informativa completa'}
+            </button>
+            
+            <p className="text-xs text-center text-gray-500 mt-3">
+              Cliccando confermi di aver letto e compreso l'informativa
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Resto della tua app (portafogli)
+  return (
+    <div>
+      {/* Tua app normale qui */}
+    </div>
+  );
+}import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const COLORS = {
