@@ -1,88 +1,4 @@
-if (!disclaimerAccepted) {
-  return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0,0,0,0.8)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      zIndex: 9999
-    }}>
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        maxWidth: '600px',
-        width: '100%',
-        maxHeight: '90vh',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        
-        {/* Header */}
-        <div style={{
-          backgroundColor: '#f59e0b',
-          color: 'white',
-          padding: '20px',
-          borderTopLeftRadius: '12px',
-          borderTopRightRadius: '12px'
-        }}>
-          <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
-            ⚠️ Informativa Importante
-          </h2>
-        </div>
-
-        {/* Contenuto scrollabile */}
-        <div 
-          onScroll={handleScroll}
-          style={{
-            padding: '20px',
-            overflowY: 'auto',
-            flex: 1,
-            fontSize: '14px',
-            lineHeight: '1.6'
-          }}
-        >
-          <p><strong>Finalità didattica:</strong> Scopo informativo ed educativo. Non costituisce consulenza.</p>
-          <p><strong>Nessuna attività regolamentata:</strong> Pessoa non è consulente autorizzato.</p>
-          <p><strong>Portafogli teorici:</strong> Esempi didattici generici.</p>
-          <p><strong>Rendimenti ipotetici:</strong> Non garantiscono risultati futuri.</p>
-          <p><strong>Responsabilità:</strong> L'utente decide autonomamente.</p>
-          <p style={{ marginTop: '20px', fontSize: '12px', color: '#666' }}>
-            Scorri fino in fondo per procedere ↓
-          </p>
-        </div>
-
-        {/* Pulsante */}
-        <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
-          <button
-            onClick={acceptDisclaimer}
-            disabled={!canAccept}
-            style={{
-              width: '100%',
-              padding: '16px',
-              fontSize: '16px',
-              fontWeight: 'bold',
-              borderRadius: '8px',
-              border: 'none',
-              backgroundColor: canAccept ? '#16a34a' : '#d1d5db',
-              color: canAccept ? 'white' : '#6b7280',
-              cursor: canAccept ? 'pointer' : 'not-allowed'
-            }}
-          >
-            {canAccept ? '✓ Ho letto e accetto' : 'Scorri per abilitare'}
-          </button>
-        </div>
-
-      </div>
-    </div>
-  );
-}
-}import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const COLORS = {
@@ -311,6 +227,99 @@ const portfolios = [
 export default function PortafogliModello() {
   const [selectedPortfolio, setSelectedPortfolio] = useState(portfolios[0]);
   const [viewMode, setViewMode] = useState('field');
+  const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
+  const [canAccept, setCanAccept] = useState(false);
+
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    if (scrollTop + clientHeight >= scrollHeight - 10) {
+      setCanAccept(true);
+    }
+  };
+
+  const acceptDisclaimer = () => {
+    if (canAccept) setDisclaimerAccepted(true);
+  };
+
+  if (!disclaimerAccepted) {
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0, left: 0, right: 0, bottom: 0,
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        zIndex: 9999
+      }}>
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          maxWidth: '600px',
+          width: '100%',
+          maxHeight: '90vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          {/* Header */}
+          <div style={{
+            backgroundColor: '#f59e0b',
+            color: 'white',
+            padding: '20px',
+            borderTopLeftRadius: '12px',
+            borderTopRightRadius: '12px'
+          }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
+              ⚠️ Informativa Importante
+            </h2>
+          </div>
+
+          {/* Contenuto scrollabile */}
+          <div
+            onScroll={handleScroll}
+            style={{
+              padding: '20px',
+              overflowY: 'auto',
+              flex: 1,
+              fontSize: '14px',
+              lineHeight: '1.6'
+            }}
+          >
+            <p><strong>Finalità didattica:</strong> Scopo informativo ed educativo. Non costituisce consulenza.</p>
+            <p><strong>Nessuna attività regolamentata:</strong> Non è consulente autorizzato.</p>
+            <p><strong>Portafogli teorici:</strong> Esempi didattici generici.</p>
+            <p><strong>Rendimenti ipotetici:</strong> Non garantiscono risultati futuri.</p>
+            <p><strong>Responsabilità:</strong> L'utente decide autonomamente.</p>
+            <p style={{ marginTop: '20px', fontSize: '12px', color: '#666' }}>
+              Scorri fino in fondo per procedere ↓
+            </p>
+          </div>
+
+          {/* Pulsante */}
+          <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
+            <button
+              onClick={acceptDisclaimer}
+              disabled={!canAccept}
+              style={{
+                width: '100%',
+                padding: '16px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                borderRadius: '8px',
+                border: 'none',
+                backgroundColor: canAccept ? '#16a34a' : '#d1d5db',
+                color: canAccept ? 'white' : '#6b7280',
+                cursor: canAccept ? 'pointer' : 'not-allowed'
+              }}
+            >
+              {canAccept ? '✓ Ho letto e accetto' : 'Scorri per abilitare'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const SoccerField = () => {
     const positions = {
@@ -362,26 +371,20 @@ export default function PortafogliModello() {
 
     return (
       <div className="relative mx-auto w-full max-w-4xl rounded-lg bg-gradient-to-b from-green-600 to-green-700 p-8 shadow-2xl">
-        {/* Field markings */}
         <div className="absolute inset-0 overflow-hidden rounded-lg opacity-20">
           <div className="absolute left-1/2 top-0 h-full w-px bg-white"></div>
           <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white"></div>
         </div>
 
         <div className="relative space-y-8">
-          {/* PORTIERE */}
           <div className="flex justify-center">
             <PlayerCard portfolio={positions.portiere[0]} />
           </div>
-
-          {/* DIFESA (3) */}
           <div className="flex justify-around px-8">
             {positions.difesa.map((p) => (
               <PlayerCard key={p.id} portfolio={p} size="small" />
             ))}
           </div>
-
-          {/* CENTROCAMPO (4) */}
           <div className="grid grid-cols-4 gap-4">
             {positions.centrocampo.map((p) => (
               <div key={p.id} className="flex justify-center">
@@ -389,8 +392,6 @@ export default function PortafogliModello() {
               </div>
             ))}
           </div>
-
-          {/* ATTACCO (3) */}
           <div className="flex justify-around px-8">
             {positions.attacco.map((p) => (
               <PlayerCard key={p.id} portfolio={p} size="small" />
@@ -419,7 +420,6 @@ export default function PortafogliModello() {
         <h3 className="text-lg font-bold text-gray-900">{portfolio.name}</h3>
         <p className="text-sm text-gray-600">{portfolio.subtitle}</p>
       </div>
-      
       <div className="h-40">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -440,7 +440,6 @@ export default function PortafogliModello() {
           </PieChart>
         </ResponsiveContainer>
       </div>
-
       <div className="mt-2 space-y-1 text-xs">
         <div><strong>Rendimento:</strong> {portfolio.rendimento}</div>
         <div><strong>Volatilità:</strong> {portfolio.volatilita}</div>
@@ -616,16 +615,16 @@ export default function PortafogliModello() {
 
           <div>
             <h3 className="mb-3 font-semibold text-gray-800">Note Metodologiche</h3>
-            
+
             <div className="mb-3">
               <h4 className="font-semibold text-gray-700">¹ Perché bond a breve scadenza (3-5 anni) e non inflation-linked?</h4>
               <p className="mt-1">
-                Gli inflation-linked bonds (TIPS europei) presentano svantaggi significativi per investitori italiani: 
-                (1) <strong>Tassazione penalizzante</strong> - si paga il 26% sia sul coupon reale che sull'aggiustamento inflazione annuale, 
-                erodendo il vantaggio; (2) <strong>Rendimento reale più basso</strong> - se l'inflazione resta moderata, 
-                il rendimento totale è inferiore ai bond nominali; (3) <strong>Maggiore volatilità</strong> - i prezzi si muovono 
-                in base alle aspettative di inflazione futura; (4) <strong>Duration più lunga</strong> - tipicamente 7-15 anni 
-                vs 3-5 anni dei bond corti. Per protezione inflazione reale preferiamo commodities, oro e REIT nei portafogli 
+                Gli inflation-linked bonds (TIPS europei) presentano svantaggi significativi per investitori italiani:
+                (1) <strong>Tassazione penalizzante</strong> - si paga il 26% sia sul coupon reale che sull'aggiustamento inflazione annuale,
+                erodendo il vantaggio; (2) <strong>Rendimento reale più basso</strong> - se l'inflazione resta moderata,
+                il rendimento totale è inferiore ai bond nominali; (3) <strong>Maggiore volatilità</strong> - i prezzi si muovono
+                in base alle aspettative di inflazione futura; (4) <strong>Duration più lunga</strong> - tipicamente 7-15 anni
+                vs 3-5 anni dei bond corti. Per protezione inflazione reale preferiamo commodities, oro e REIT nei portafogli
                 che lo richiedono (es. "Non ci sono più le mezze stagioni").
               </p>
             </div>
@@ -633,12 +632,12 @@ export default function PortafogliModello() {
             <div>
               <h4 className="font-semibold text-gray-700">² Perché bond lunghi (20-25 anni) nel portafoglio "Non ci sono più le mezze stagioni"?</h4>
               <p className="mt-1">
-                I bond lunghi proteggono efficacemente dalla <strong>deflazione e dalle recessioni</strong>. 
-                Durante deflazione il valore reale dei pagamenti fissi aumenta, e le banche centrali tagliano i tassi 
-                verso zero. I bond lunghi beneficiano massimamente dal calo tassi grazie alla loro alta duration 
-                (~20 vs ~4 dei bond corti): un calo dell'1% nei tassi genera +20% di apprezzamento vs +4% dei bond corti. 
-                Questo effetto è stato evidente in Giappone (1990-2020) e durante la crisi 2008-2009 (bond lunghi USA +25% 
-                mentre azioni -22%). Nel portafoglio All Weather, i bond lunghi sono la protezione specifica per scenari 
+                I bond lunghi proteggono efficacemente dalla <strong>deflazione e dalle recessioni</strong>.
+                Durante deflazione il valore reale dei pagamenti fissi aumenta, e le banche centrali tagliano i tassi
+                verso zero. I bond lunghi beneficiano massimamente dal calo tassi grazie alla loro alta duration
+                (~20 vs ~4 dei bond corti): un calo dell'1% nei tassi genera +20% di apprezzamento vs +4% dei bond corti.
+                Questo effetto è stato evidente in Giappone (1990-2020) e durante la crisi 2008-2009 (bond lunghi USA +25%
+                mentre azioni -22%). Nel portafoglio All Weather, i bond lunghi sono la protezione specifica per scenari
                 deflazionistici/recessivi, mentre commodities e oro proteggono dall'inflazione.
               </p>
             </div>
