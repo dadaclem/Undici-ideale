@@ -1,4 +1,89 @@
-import React, { useState } from 'react';
+if (!disclaimerAccepted) {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl flex flex-col" style={{ maxHeight: '85vh' }}>
+        
+        {/* Header fisso */}
+        <div className="bg-amber-500 text-white p-4 rounded-t-lg flex-shrink-0">
+          <h2 className="text-xl font-bold">⚠️ Informativa Importante</h2>
+          <p className="text-sm mt-1">Prima di accedere, leggi attentamente</p>
+        </div>
+
+        {/* Contenuto scrollabile */}
+        <div 
+          className="p-6 overflow-y-auto flex-1"
+          onScroll={handleScroll}
+          style={{ minHeight: '200px', maxHeight: 'calc(85vh - 180px)' }}
+        >
+          <h3 className="font-bold text-lg mb-3">Disclaimer Legale Marzo 2026</h3>
+          
+          <div className="space-y-3 text-sm">
+            <p>
+              <strong>Finalità didattica:</strong> I contenuti hanno esclusivo scopo informativo 
+              ed educativo. Non costituiscono consulenza finanziaria personalizzata.
+            </p>
+
+            <p>
+              <strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente 
+              autorizzato. Non gestiamo capitali né riceviamo commissioni.
+            </p>
+
+            <p>
+              <strong>Portafogli teorici:</strong> Le allocazioni sono esempi didattici che 
+              non tengono conto della tua situazione personale.
+            </p>
+
+            <p>
+              <strong>Rendimenti ipotetici:</strong> Stime basate su dati storici. 
+              I rendimenti passati non garantiscono risultati futuri.
+            </p>
+
+            <p>
+              <strong>Conformità volontaria:</strong> Pessoa si allinea alle Linee Guida 
+              ESMA-Consob gennaio 2026.
+            </p>
+
+            <p>
+              <strong>Responsabilità:</strong> L'utente è responsabile delle proprie decisioni. 
+              Pessoa non risponde di eventuali perdite.
+            </p>
+
+            <p>
+              <strong>Raccomandazione:</strong> Consulta un professionista abilitato prima 
+              di investire.
+            </p>
+
+            <p className="text-xs text-gray-500 italic mt-4">
+              📜 Scorri fino in fondo per abilitare il pulsante
+            </p>
+          </div>
+        </div>
+
+        {/* Footer fisso con pulsante */}
+        <div className="border-t bg-gray-50 p-4 rounded-b-lg flex-shrink-0">
+          <button
+            onClick={acceptDisclaimer}
+            disabled={!canAccept}
+            className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all ${
+              canAccept
+                ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg'
+                : 'bg-gray-300 text-gray-500'
+            }`}
+          >
+            {canAccept ? '✓ Ho letto e prendo visione' : '↓ Scorri per abilitare'}
+          </button>
+          
+          <p className="text-xs text-center text-gray-500 mt-2">
+            {canAccept 
+              ? 'Clicca per accedere ai portafogli' 
+              : 'Leggi tutto il testo per procedere'}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  );
+}import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const COLORS = {
