@@ -229,17 +229,17 @@ export default function PortafogliModello() {
   const [viewMode, setViewMode] = useState('field');
   const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
+  const [countdown, setCountdown] = useState(5);
 
-  const handleScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
+  React.useEffect(() => {
+    if (disclaimerAccepted) return;
+    if (countdown <= 0) {
       setCanAccept(true);
+      return;
     }
-  };
-
-  const acceptDisclaimer = () => {
-    if (canAccept) setDisclaimerAccepted(true);
-  };
+    const timer = setTimeout(() => setCountdown((c) => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [countdown, disclaimerAccepted]);
 
   if (!disclaimerAccepted) {
     return (
@@ -258,7 +258,6 @@ export default function PortafogliModello() {
           borderRadius: '12px',
           maxWidth: '600px',
           width: '100%',
-          maxHeight: '90vh',
           display: 'flex',
           flexDirection: 'column'
         }}>
@@ -275,31 +274,19 @@ export default function PortafogliModello() {
             </h2>
           </div>
 
-          {/* Contenuto scrollabile */}
-          <div
-            onScroll={handleScroll}
-            style={{
-              padding: '20px',
-              overflowY: 'auto',
-              flex: 1,
-              fontSize: '14px',
-              lineHeight: '1.6'
-            }}
-          >
+          {/* Contenuto */}
+          <div style={{ padding: '20px', fontSize: '14px', lineHeight: '1.6' }}>
             <p><strong>Finalità didattica:</strong> Scopo informativo ed educativo. Non costituisce consulenza.</p>
             <p><strong>Nessuna attività regolamentata:</strong> Non è consulente autorizzato.</p>
             <p><strong>Portafogli teorici:</strong> Esempi didattici generici.</p>
             <p><strong>Rendimenti ipotetici:</strong> Non garantiscono risultati futuri.</p>
             <p><strong>Responsabilità:</strong> L'utente decide autonomamente.</p>
-            <p style={{ marginTop: '20px', fontSize: '12px', color: '#666' }}>
-              Scorri fino in fondo per procedere ↓
-            </p>
           </div>
 
           {/* Pulsante */}
           <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
             <button
-              onClick={acceptDisclaimer}
+              onClick={() => setDisclaimerAccepted(true)}
               disabled={!canAccept}
               style={{
                 width: '100%',
@@ -310,10 +297,11 @@ export default function PortafogliModello() {
                 border: 'none',
                 backgroundColor: canAccept ? '#16a34a' : '#d1d5db',
                 color: canAccept ? 'white' : '#6b7280',
-                cursor: canAccept ? 'pointer' : 'not-allowed'
+                cursor: canAccept ? 'pointer' : 'not-allowed',
+                transition: 'background-color 0.3s'
               }}
             >
-              {canAccept ? '✓ Ho letto e accetto' : 'Scorri per abilitare'}
+              {canAccept ? '✓ Ho letto e accetto' : `Attendi ${countdown}s per continuare...`}
             </button>
           </div>
         </div>
