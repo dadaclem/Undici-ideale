@@ -310,27 +310,27 @@ export default function PortafogliModello() {
       attacco: portfolios.slice(8, 11)
     };
 
-    const PlayerCard = ({ portfolio, size = 'normal' }) => (
+    const PlayerCard = ({ portfolio, size = 'normal', overridePosition = null, overrideName = null }) => (
       <div
         onClick={() => setSelectedPortfolio(portfolio)}
         className={`cursor-pointer rounded-lg border-2 bg-white p-2 shadow-lg transition-all hover:scale-105 hover:shadow-xl ${
           selectedPortfolio.id === portfolio.id ? 'border-yellow-400 ring-2 ring-yellow-400' : 'border-blue-500'
-        } ${size === 'small' ? 'w-24' : 'w-32'}`}
+        } ${size === 'small' ? 'w-32' : 'w-40'}`}
       >
         <div className="mb-1 text-center">
           <div className={`${size === 'small' ? 'text-[10px]' : 'text-xs'} font-semibold text-gray-800`}>
-            {portfolio.position}
+            {overridePosition || portfolio.position}
           </div>
         </div>
-        <div className={`${size === 'small' ? 'h-12' : 'h-16'} overflow-hidden`}>
+        <div className={`${size === 'small' ? 'h-16' : 'h-20'} overflow-hidden`}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={portfolio.allocation}
                 cx="50%"
                 cy="50%"
-                innerRadius={size === 'small' ? 10 : 15}
-                outerRadius={size === 'small' ? 20 : 28}
+                innerRadius={size === 'small' ? 14 : 18}
+                outerRadius={size === 'small' ? 28 : 36}
                 paddingAngle={2}
                 dataKey="value"
               >
@@ -342,7 +342,7 @@ export default function PortafogliModello() {
           </ResponsiveContainer>
         </div>
         <div className={`mt-1 ${size === 'small' ? 'text-[9px]' : 'text-[10px]'} text-center font-bold leading-tight text-gray-900`}>
-          {portfolio.name}
+          {overrideName || portfolio.name}
         </div>
       </div>
     );
@@ -358,21 +358,21 @@ export default function PortafogliModello() {
           <div className="flex justify-center">
             <PlayerCard portfolio={positions.portiere[0]} />
           </div>
-          <div className="flex justify-around px-8">
-            <PlayerCard portfolio={positions.difesa[1]} size="small" />
-            <PlayerCard portfolio={positions.difesa[0]} size="small" />
-            <PlayerCard portfolio={positions.difesa[2]} size="small" />
+          <div className="flex justify-around px-4">
+            <PlayerCard portfolio={positions.difesa[1]} size="small" overridePosition="Centrale di sinistra" />
+            <PlayerCard portfolio={positions.difesa[2]} size="small" overridePosition="Centrale" />
+            <PlayerCard portfolio={positions.difesa[0]} size="small" overridePosition="Centrale di destra" />
           </div>
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.centrocampo[0]} size="small" />
+              <PlayerCard portfolio={positions.centrocampo[0]} size="small" overridePosition="Mediano" />
             </div>
             <div className="flex justify-around w-full px-4">
-              <PlayerCard portfolio={positions.centrocampo[1]} size="small" />
+              <PlayerCard portfolio={positions.centrocampo[3]} size="small" overridePosition="Regista" />
               <PlayerCard portfolio={positions.centrocampo[2]} size="small" />
             </div>
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.centrocampo[3]} size="small" />
+              <PlayerCard portfolio={positions.centrocampo[1]} size="small" overridePosition="Trequartista" />
             </div>
           </div>
           <div className="flex flex-col items-center gap-2">
@@ -387,7 +387,7 @@ export default function PortafogliModello() {
         </div>
 
         <div className="mt-6 text-center text-sm font-bold text-white">
-          FORMAZIONE: 3-4-3 (rombo)
+          FORMAZIONE: 3-4-3
         </div>
       </div>
     );
@@ -539,7 +539,7 @@ export default function PortafogliModello() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-4xl font-bold text-gray-900">⚽ Portafogli Modello</h1>
-          <p className="text-lg text-gray-600">La tua squadra di investimenti - Formazione 3-4-3</p>
+          <p className="text-lg text-gray-600">L'undici ideale</p>
           <p className="mt-2 text-xs text-gray-500">
             Finalità illustrativa - Non costituisce consulenza personalizzata
           </p>
