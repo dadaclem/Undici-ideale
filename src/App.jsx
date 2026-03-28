@@ -475,7 +475,7 @@ export default function PortafogliModello() {
               <Tooltip formatter={(value, name) => [`${value}%`, name]} />
             </PieChart>
           </ResponsiveContainer>
-          <div className="mt-3 flex flex-col gap-1.5">
+          <div className="mt-3 flex flex-col gap-1.5 md:hidden">
             {portfolio.allocation.map((entry, index) => (
               <div key={index} className="flex items-center gap-2">
                 <div className="flex-shrink-0 rounded-sm" style={{ width: 12, height: 12, backgroundColor: entry.color }} />
