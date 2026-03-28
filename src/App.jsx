@@ -457,42 +457,53 @@ export default function PortafogliModello() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <h3 className="mb-3 text-lg font-semibold">Allocazione Asset</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
                 data={portfolio.allocation}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
-                label={({ name, value }) => `${name}: ${value}%`}
-                outerRadius={100}
-                fill="#8884d8"
+                innerRadius={50}
+                outerRadius={90}
+                paddingAngle={2}
                 dataKey="value"
               >
                 {portfolio.allocation.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip formatter={(value, name) => [`${value}%`, name]} />
             </PieChart>
           </ResponsiveContainer>
+          <div className="mt-3 flex flex-col gap-1.5">
+            {portfolio.allocation.map((entry, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <div className="flex-shrink-0 rounded-sm" style={{ width: 12, height: 12, backgroundColor: entry.color }} />
+                <span className="text-sm text-gray-700 flex-1">{entry.name}</span>
+                <span className="text-sm font-bold text-gray-900">{entry.value}%</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div>
           <h3 className="mb-3 text-lg font-semibold">Composizione</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={portfolio.allocation} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" domain={[0, 100]} />
-              <YAxis dataKey="name" type="category" width={150} />
-              <Tooltip />
-              <Bar dataKey="value" fill="#3b82f6">
-                {portfolio.allocation.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="flex flex-col gap-2 mt-2">
+            {portfolio.allocation.map((entry, index) => (
+              <div key={index}>
+                <div className="flex justify-between text-xs text-gray-600 mb-1">
+                  <span className="truncate pr-2">{entry.name}</span>
+                  <span className="font-bold flex-shrink-0">{entry.value}%</span>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-5 overflow-hidden">
+                  <div
+                    className="h-5 rounded-full transition-all"
+                    style={{ width: `${entry.value}%`, backgroundColor: entry.color }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
