@@ -394,35 +394,52 @@ export default function PortafogliModello() {
         selectedPortfolio.id === portfolio.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white hover:border-blue-300'
       }`}
     >
-      <div className="mb-2">
+      <div className="mb-3">
         <span className="text-xs font-semibold text-gray-500">
           {portfolio.category} - {portfolio.position}
         </span>
         <h3 className="text-lg font-bold text-gray-900">{portfolio.name}</h3>
         <p className="text-sm text-gray-600">{portfolio.subtitle}</p>
       </div>
-      <div className="h-40">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={portfolio.allocation}
-              cx="50%"
-              cy="50%"
-              innerRadius={30}
-              outerRadius={60}
-              paddingAngle={2}
-              dataKey="value"
-            >
-              {portfolio.allocation.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
+
+      <div className="flex gap-3 items-center">
+        <div className="flex-shrink-0" style={{ width: 100, height: 100 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={portfolio.allocation}
+                cx="50%"
+                cy="50%"
+                innerRadius={22}
+                outerRadius={44}
+                paddingAngle={2}
+                dataKey="value"
+              >
+                {portfolio.allocation.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="flex flex-col gap-1 flex-1 min-w-0">
+          {portfolio.allocation.map((entry, index) => (
+            <div key={index} className="flex items-center gap-1.5 min-w-0">
+              <div
+                className="flex-shrink-0 rounded-sm"
+                style={{ width: 10, height: 10, backgroundColor: entry.color }}
+              />
+              <span className="text-xs text-gray-700 truncate">{entry.name}</span>
+              <span className="text-xs font-semibold text-gray-900 flex-shrink-0 ml-auto">{entry.value}%</span>
+            </div>
+          ))}
+        </div>
       </div>
+
       {portfolio.note && (
-        <p className="mt-2 text-xs text-gray-600 italic">{portfolio.note}</p>
+        <p className="mt-3 text-xs text-gray-600 italic border-t pt-2">{portfolio.note}</p>
       )}
     </div>
   );
