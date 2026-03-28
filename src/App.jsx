@@ -44,9 +44,6 @@ const portfolios = [
       { name: 'Oro Fisico', value: 20, color: COLORS.gold }
     ],
     versionePigra: null,
-    rendimento: '2.5-3.5% annuo',
-    volatilita: 'Molto bassa (max drawdown ~3-5%)',
-    orizzonte: 'Breve-medio termine',
     note: 'Solidità pura con protezione extra che i vecchi libretti non avevano'
   },
   {
@@ -61,9 +58,6 @@ const portfolios = [
       { name: 'Dividend Aristocrats', value: 30, color: COLORS.dividends }
     ],
     versionePigra: 'REIT globali diversificati',
-    rendimento: '3-4% distribuito',
-    volatilita: 'Bassa (max drawdown ~8-12%)',
-    orizzonte: 'Medio termine',
     note: 'Flusso costante come una rendita da affitto'
   },
   {
@@ -82,9 +76,6 @@ const portfolios = [
       { name: 'REITs', value: 5, color: COLORS.reit }
     ],
     versionePigra: '80% Vanguard LifeStrategy 40% + 20% Commodities (approssimativo)',
-    rendimento: '5-7% annuo',
-    volatilita: 'Media (~9-11% annua)',
-    orizzonte: '10-20 anni',
     note: 'v2.2 Barbell + Gold Heavy: Barbell bonds puro (20% lunghi + 20% corti, ZERO intermedi). Quality per crescita resiliente. Hard assets 30% (15% oro + 10% commodities + 5% REIT) = corazza reale contro inflazione.'
   },
   {
@@ -102,9 +93,6 @@ const portfolios = [
       { name: 'Oro', value: 10, color: COLORS.gold }
     ],
     versionePigra: 'iShares World Quality + iShares Global Aggregate Bond + Oro',
-    rendimento: '4-5% annuo',
-    volatilita: 'Bassa-media (~8-10% annua)',
-    orizzonte: '5-15 anni',
     note: 'Il ponte tra difesa e centrocampo. Quality + Dividend per crescita difensiva, barbell bonds (30% corti + 20% intermedi) per flessibilità, oro 10% per protezione.'
   },
   {
@@ -122,9 +110,6 @@ const portfolios = [
       { name: 'Oro', value: 5, color: COLORS.gold }
     ],
     versionePigra: 'iShares LifePath 2055/2060 (senza oro, de-risking automatico)',
-    rendimento: '6-8% annuo (de-risking progressivo)',
-    volatilita: 'Alta inizialmente (75% azioni), decresce nel tempo',
-    orizzonte: '20-40 anni',
     note: 'Allocazione iniziale per giovani. De-risking automatico riduce azioni e aumenta bond con l\'età. Oro 5% costante per protezione crisi durante accumulo.'
   },
   {
@@ -139,9 +124,6 @@ const portfolios = [
       { name: 'Obbligazionario', value: 40, color: COLORS.bonds }
     ],
     versionePigra: 'Vanguard LifeStrategy 60%',
-    rendimento: '4-6% annuo',
-    volatilita: 'Media (max drawdown ~15-20%)',
-    orizzonte: '3-10 anni',
     note: 'Allocazione FISSA 60/40 (no de-risking). Il classico bilanciato.'
   },
   {
@@ -158,9 +140,6 @@ const portfolios = [
       { name: 'High Dividend Yield', value: 25, color: COLORS.dividends }
     ],
     versionePigra: null,
-    rendimento: '4-5% + prelievi programmati',
-    volatilita: 'Bassa-media (~11-12% annua)',
-    orizzonte: 'Silver Economy / pensionamento attivo',
     note: 'Equity Income: 50% low vol + 50% high dividend per protezione drawdown e cash flow. Bond ladder con scadenze distribuite (iBonds 2026-2030) ricostituisce cash automaticamente. Elimina Sequence of Returns Risk.'
   },
   {
@@ -178,9 +157,6 @@ const portfolios = [
       { name: 'Oro', value: 5, color: COLORS.gold }
     ],
     versionePigra: 'iShares Edge MSCI World Multifactor + Bond + Oro',
-    rendimento: '7-9% annuo (teorico)',
-    volatilita: 'Media-alta (max drawdown ~30-35%)',
-    orizzonte: 'Lungo termine',
     note: 'Tre fattori equilibrati (Momentum, Quality, Dividend) con base obbligazionaria e oro per stabilità. Ricerca sovraperformance con rischio controllato.'
   },
   {
@@ -197,9 +173,6 @@ const portfolios = [
       { name: 'Momentum', value: 15, color: COLORS.momentum }
     ],
     versionePigra: null,
-    rendimento: '5-7% distribuito',
-    volatilita: 'Media-alta (max drawdown ~20-25%)',
-    orizzonte: 'Lungo termine',
     note: 'Focus su distribuzione di reddito passivo. Cash flow > capital gain.'
   },
   {
@@ -213,9 +186,6 @@ const portfolios = [
       { name: 'MSCI World / VWCE', value: 100, color: COLORS.stocks }
     ],
     versionePigra: null,
-    rendimento: '7-9% annuo',
-    volatilita: 'Alta (max drawdown ~50-55%)',
-    orizzonte: '30-50+ anni',
     note: 'Potenza pura. Obiettivo: massimo capitale finale per eredità. La strategia più semplice ed efficace.'
   }
 ];
@@ -331,6 +301,7 @@ export default function PortafogliModello() {
       </div>
     );
   }
+
   const SoccerField = () => {
     const positions = {
       portiere: [portfolios[0]],
@@ -450,10 +421,9 @@ export default function PortafogliModello() {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-2 space-y-1 text-xs">
-        <div><strong>Rendimento:</strong> {portfolio.rendimento}</div>
-        <div><strong>Volatilità:</strong> {portfolio.volatilita}</div>
-      </div>
+      {portfolio.note && (
+        <p className="mt-2 text-xs text-gray-600 italic">{portfolio.note}</p>
+      )}
     </div>
   );
 
@@ -510,22 +480,17 @@ export default function PortafogliModello() {
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="rounded-lg bg-gray-50 p-4">
-          <h4 className="mb-2 font-semibold text-gray-700">Caratteristiche</h4>
-          <ul className="space-y-2 text-sm">
-            <li><strong>Rendimento atteso:</strong> {portfolio.rendimento}</li>
-            <li><strong>Volatilità:</strong> {portfolio.volatilita}</li>
-            <li><strong>Orizzonte:</strong> {portfolio.orizzonte}</li>
-            {portfolio.versionePigra && (
-              <li><strong>Versione pigra:</strong> {portfolio.versionePigra}</li>
-            )}
-          </ul>
-        </div>
-
         {portfolio.note && (
           <div className="rounded-lg bg-yellow-50 p-4">
             <h4 className="mb-2 font-semibold text-yellow-800">Note</h4>
             <p className="text-sm text-yellow-900">{portfolio.note}</p>
+          </div>
+        )}
+
+        {portfolio.versionePigra && (
+          <div className="rounded-lg bg-gray-50 p-4">
+            <h4 className="mb-2 font-semibold text-gray-700">Versione Pigra</h4>
+            <p className="text-sm text-gray-800">{portfolio.versionePigra}</p>
           </div>
         )}
       </div>
