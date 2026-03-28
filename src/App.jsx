@@ -318,9 +318,6 @@ export default function PortafogliModello() {
         } ${size === 'small' ? 'w-24' : 'w-32'}`}
       >
         <div className="mb-1 text-center">
-          <div className={`${size === 'small' ? 'text-xs' : 'text-sm'} font-bold text-blue-600`}>
-            {portfolio.positionNumber}
-          </div>
           <div className={`${size === 'small' ? 'text-[10px]' : 'text-xs'} font-semibold text-gray-800`}>
             {portfolio.position}
           </div>
@@ -362,26 +359,35 @@ export default function PortafogliModello() {
             <PlayerCard portfolio={positions.portiere[0]} />
           </div>
           <div className="flex justify-around px-8">
-            {positions.difesa.map((p) => (
-              <PlayerCard key={p.id} portfolio={p} size="small" />
-            ))}
+            <PlayerCard portfolio={positions.difesa[1]} size="small" />
+            <PlayerCard portfolio={positions.difesa[0]} size="small" />
+            <PlayerCard portfolio={positions.difesa[2]} size="small" />
           </div>
-          <div className="grid grid-cols-4 gap-4">
-            {positions.centrocampo.map((p) => (
-              <div key={p.id} className="flex justify-center">
-                <PlayerCard portfolio={p} size="small" />
-              </div>
-            ))}
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex justify-center">
+              <PlayerCard portfolio={positions.centrocampo[0]} size="small" />
+            </div>
+            <div className="flex justify-around w-full px-4">
+              <PlayerCard portfolio={positions.centrocampo[1]} size="small" />
+              <PlayerCard portfolio={positions.centrocampo[2]} size="small" />
+            </div>
+            <div className="flex justify-center">
+              <PlayerCard portfolio={positions.centrocampo[3]} size="small" />
+            </div>
           </div>
-          <div className="flex justify-around px-8">
-            {positions.attacco.map((p) => (
-              <PlayerCard key={p.id} portfolio={p} size="small" />
-            ))}
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex justify-around w-full px-4">
+              <PlayerCard portfolio={positions.attacco[0]} size="small" />
+              <PlayerCard portfolio={positions.attacco[1]} size="small" />
+            </div>
+            <div className="flex justify-center">
+              <PlayerCard portfolio={positions.attacco[2]} size="small" />
+            </div>
           </div>
         </div>
 
         <div className="mt-6 text-center text-sm font-bold text-white">
-          FORMAZIONE: 3-4-3
+          FORMAZIONE: 3-4-3 (rombo)
         </div>
       </div>
     );
@@ -448,7 +454,7 @@ export default function PortafogliModello() {
     <div className="rounded-lg border-2 border-blue-500 bg-white p-6">
       <div className="mb-4">
         <span className="text-sm font-semibold text-blue-600">
-          {portfolio.category} - {portfolio.position} #{portfolio.positionNumber}
+          {portfolio.category} - {portfolio.position}
         </span>
         <h2 className="text-2xl font-bold text-gray-900">{portfolio.name}</h2>
         <p className="text-gray-600">{portfolio.subtitle}</p>
@@ -599,7 +605,7 @@ export default function PortafogliModello() {
                       : 'bg-white text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  {portfolio.positionNumber}. {portfolio.name}
+                  {portfolio.name}
                 </button>
               ))}
             </div>
