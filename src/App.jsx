@@ -30,10 +30,6 @@ const portfolios = [
       { name: 'Oro Fisico', value: 25, color: COLORS.gold },
       { name: 'Cash/Monetario', value: 25, color: COLORS.cash }
     ],
-    versionePigra: 'ETF monetario + ETC oro',
-    rendimento: '1.5-2.5% annuo',
-    volatilita: 'Minima (max drawdown ~2-3%)',
-    orizzonte: 'Sempre disponibile',
     note: 'Protezione contro crisi sistemiche e traumi finanziari. Dormo tra due guanciali.'
   },
   {
