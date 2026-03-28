@@ -232,85 +232,125 @@ export default function PortafogliModello() {
   const [countdown, setCountdown] = useState(5);
 
   React.useEffect(() => {
-    if (disclaimerAccepted) return;
-    if (countdown <= 0) {
-      setCanAccept(true);
-      return;
-    }
-    const timer = setTimeout(() => setCountdown((c) => c - 1), 1000);
-    return () => clearTimeout(timer);
-  }, [countdown, disclaimerAccepted]);
-
-  if (!disclaimerAccepted) {
-    return (
+   if (!disclaimerAccepted) {
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0,0,0,0.85)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '16px',
+      zIndex: 9999
+    }}>
+      
       <div style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0, bottom: 0,
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        maxWidth: '600px',
+        width: '100%',
+        height: 'auto',
+        maxHeight: '90vh',  // ← Max 90% altezza schermo
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px',
-        zIndex: 9999
+        flexDirection: 'column',
+        overflow: 'hidden'  // ← Importante!
       }}>
+        
+        {/* Header fisso */}
         <div style={{
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          maxWidth: '600px',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column'
+          backgroundColor: '#f59e0b',
+          color: 'white',
+          padding: '16px',
+          borderTopLeftRadius: '12px',
+          borderTopRightRadius: '12px',
+          flexShrink: 0  // ← Non si comprime
         }}>
-          {/* Header */}
-          <div style={{
-            backgroundColor: '#f59e0b',
-            color: 'white',
-            padding: '20px',
-            borderTopLeftRadius: '12px',
-            borderTopRightRadius: '12px'
-          }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
-              ⚠️ Informativa Importante
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '24px' }}>⚠️</span>
+            <h2 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>
+              Informativa Importante
             </h2>
           </div>
-
-          {/* Contenuto */}
-          <div style={{ padding: '20px', fontSize: '14px', lineHeight: '1.6' }}>
-            <p><strong>Finalità didattica ed educativa:</strong> I contenuti presentati in questa applicazione hanno esclusivamente scopo informativo ed educativo nell'ambito dell'educazione finanziaria. Non costituiscono in alcun modo consulenza finanziaria personalizzata, sollecitazione all'investimento o raccomandazione di prodotti finanziari specifici.</p>
-            <p><strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente finanziario autorizzato né presta servizi di investimento ai sensi del D.Lgs 58/1998 (TUF). Non gestiamo capitali, non riceviamo commissioni da intermediari e non abbiamo conflitti di interesse nella presentazione dei portafogli modello.</p>
-            <p><strong>Portafogli modello teorici:</strong> Le allocazioni presentate sono esempi didattici a scopo illustrativo. Non tengono conto della tua situazione finanziaria personale, obiettivi, propensione al rischio, orizzonte temporale o vincoli specifici. </p>
-            <p><strong>Rendimenti ipotetici:</strong> I rendimenti indicati sono stime basate su dati storici e proiezioni teoriche. I rendimenti passati non sono indicativi di quelli futuri. Ogni investimento comporta rischi, inclusa la possibile perdita totale o parziale del capitale. </p>
-            <p><strong>Conformità volontaria:</strong> Pessoa si allinea volontariamente alle Linee Guida ESMA-Consob gennaio 2026 sulla comunicazione finanziaria,pur non essendo soggetto agli obblighi di legge previsti per gli intermediari autorizzati. </p> 
-            <p><strong>Responsabilità:</strong> L'utente è l'unico responsabile delle decisioni di investimento assunte. Pessoa non può essere ritenuta responsabile per eventuali perdite derivanti dall'utilizzo delle informazioni contenute in questa applicazione</p>
-            <p><strong>Raccomandazione:</strong> Prima di effettuare qualsiasi investimento, consulta un consulente finanziario abilitato che possa valutare la tua situazione specifica. Leggi sempre con attenzione la documentazione informativa degli strumenti finanziari (KIID, prospetto). </p> 
         </div>
 
-          {/* Pulsante */}
-          <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
-            <button
-              onClick={() => setDisclaimerAccepted(true)}
-              disabled={!canAccept}
-              style={{
-                width: '100%',
-                padding: '16px',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: canAccept ? '#16a34a' : '#d1d5db',
-                color: canAccept ? 'white' : '#6b7280',
-                cursor: canAccept ? 'pointer' : 'not-allowed',
-                transition: 'background-color 0.3s'
-              }}
-            >
-              {canAccept ? '✓ Ho letto e accetto' : `Attendi ${countdown}s per continuare...`}
-            </button>
-          </div>
+        {/* Contenuto SCROLLABILE */}
+        <div 
+          onScroll={handleScroll}
+          style={{
+            padding: '20px',
+            overflowY: 'auto',     // ← Scroll verticale
+            flex: '1',             // ← Si espande
+            fontSize: '13px',
+            lineHeight: '1.5'
+          }}
+        >
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Finalità didattica ed educativa:</strong> I contenuti presentati in questa applicazione hanno esclusivamente scopo informativo ed educativo nell'ambito dell'educazione finanziaria. Non costituiscono in alcun modo consulenza finanziaria personalizzata, sollecitazione all'investimento o raccomandazione di prodotti finanziari specifici.
+          </p>
+
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente finanziario autorizzato né presta servizi di investimento ai sensi del D.Lgs 58/1998 (TUF). Non gestiamo capitali, non riceviamo commissioni da intermediari e non abbiamo conflitti di interesse nella presentazione dei portafogli modello.
+          </p>
+
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Portafogli modello teorici:</strong> Le allocazioni presentate sono esempi didattici a scopo illustrativo. Non tengono conto della tua situazione finanziaria personale, obiettivi, propensione al rischio, orizzonte temporale o vincoli specifici.
+          </p>
+
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Rendimenti ipotetici:</strong> I rendimenti indicati sono stime basate su dati storici e proiezioni teoriche. I rendimenti passati non sono indicativi di quelli futuri. Ogni investimento comporta rischi, inclusa la possibile perdita totale o parziale del capitale.
+          </p>
+
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Conformità volontaria:</strong> Pessoa si allinea volontariamente alle Linee Guida ESMA-Consob gennaio 2026 sulla comunicazione finanziaria, pur non essendo soggetto agli obblighi di legge previsti per gli intermediari autorizzati.
+          </p>
+
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Responsabilità:</strong> L'utente è l'unico responsabile delle decisioni di investimento assunte. Pessoa non può essere ritenuta responsabile per eventuali perdite derivanti dall'utilizzo delle informazioni contenute in questa applicazione.
+          </p>
+
+          <p style={{ marginBottom: '10px' }}>
+            <strong>Raccomandazione:</strong> Prima di effettuare qualsiasi investimento, consulta un consulente finanziario abilitato che possa valutare la tua situazione specifica. Leggi sempre con attenzione la documentazione informativa degli strumenti finanziari (KIID, prospetto).
+          </p>
+
+          <p style={{ fontSize: '11px', color: '#999', marginTop: '20px', fontStyle: 'italic' }}>
+            ↓ Scorri fino in fondo per abilitare il pulsante
+          </p>
         </div>
+
+        {/* Footer fisso con pulsante */}
+        <div style={{
+          padding: '16px',
+          borderTop: '1px solid #e5e7eb',
+          flexShrink: 0  // ← Non si comprime
+        }}>
+          <button
+            onClick={acceptDisclaimer}
+            disabled={!canAccept}
+            style={{
+              width: '100%',
+              padding: '14px',
+              fontSize: '15px',
+              fontWeight: 'bold',
+              borderRadius: '8px',
+              border: 'none',
+              backgroundColor: canAccept ? '#16a34a' : '#d1d5db',
+              color: canAccept ? 'white' : '#6b7280',
+              cursor: canAccept ? 'pointer' : 'not-allowed',
+              transition: 'all 0.2s'
+            }}
+          >
+            {canAccept ? '✓ Ho letto e accetto' : 'Scorri per abilitare'}
+          </button>
+        </div>
+
       </div>
-    );
-  }
-
+    </div>
+  );
+}
   const SoccerField = () => {
     const positions = {
       portiere: [portfolios[0]],
