@@ -315,22 +315,22 @@ export default function PortafogliModello() {
         onClick={() => setSelectedPortfolio(portfolio)}
         className={`cursor-pointer rounded-lg border-2 bg-white p-2 shadow-lg transition-all hover:scale-105 hover:shadow-xl ${
           selectedPortfolio.id === portfolio.id ? 'border-yellow-400 ring-2 ring-yellow-400' : 'border-blue-500'
-        } ${size === 'small' ? 'w-32' : 'w-40'}`}
+        } w-36`}
       >
         <div className="mb-1 text-center">
-          <div className={`${size === 'small' ? 'text-[10px]' : 'text-xs'} font-semibold text-gray-800`}>
+          <div className="text-xs font-semibold text-gray-800">
             {overridePosition || portfolio.position}
           </div>
         </div>
-        <div className={`${size === 'small' ? 'h-16' : 'h-20'} overflow-hidden`}>
+        <div className="h-20 overflow-hidden">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={portfolio.allocation}
                 cx="50%"
                 cy="50%"
-                innerRadius={size === 'small' ? 14 : 18}
-                outerRadius={size === 'small' ? 28 : 36}
+                innerRadius={18}
+                outerRadius={36}
                 paddingAngle={2}
                 dataKey="value"
               >
@@ -341,7 +341,7 @@ export default function PortafogliModello() {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className={`mt-1 ${size === 'small' ? 'text-[9px]' : 'text-[10px]'} text-center font-bold leading-tight text-gray-900`}>
+        <div className="mt-1 text-[10px] text-center font-bold leading-tight text-gray-900">
           {overrideName || portfolio.name}
         </div>
       </div>
