@@ -486,7 +486,7 @@ export default function PortafogliModello() {
           </div>
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <h3 className="mb-3 text-lg font-semibold">Composizione</h3>
           <div className="flex flex-col gap-2 mt-2">
             {portfolio.allocation.map((entry, index) => (
