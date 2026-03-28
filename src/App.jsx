@@ -479,21 +479,22 @@ export default function PortafogliModello() {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {portfolio.note && (
-          <div className="rounded-lg bg-yellow-50 p-4">
-            <h4 className="mb-2 font-semibold text-yellow-800">Note</h4>
-            <p className="text-sm text-yellow-900">{portfolio.note}</p>
-          </div>
-        )}
-
-        {portfolio.versionePigra && (
-          <div className="rounded-lg bg-gray-50 p-4">
-            <h4 className="mb-2 font-semibold text-gray-700">Versione Pigra</h4>
-            <p className="text-sm text-gray-800">{portfolio.versionePigra}</p>
-          </div>
-        )}
-      </div>
+      {(portfolio.note || portfolio.versionePigra) && (
+        <div className="mt-6 flex flex-col gap-4 md:flex-row md:justify-end">
+          {portfolio.versionePigra && (
+            <div className="rounded-lg bg-gray-50 p-4 md:w-1/2">
+              <h4 className="mb-2 font-semibold text-gray-700">Versione Pigra</h4>
+              <p className="text-sm text-gray-800">{portfolio.versionePigra}</p>
+            </div>
+          )}
+          {portfolio.note && (
+            <div className="rounded-lg bg-yellow-50 p-4 md:w-1/2">
+              <h4 className="mb-2 font-semibold text-yellow-800">Note</h4>
+              <p className="text-sm text-yellow-900">{portfolio.note}</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 
