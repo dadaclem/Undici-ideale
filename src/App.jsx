@@ -279,15 +279,16 @@ export default function PortafogliModello() {
 
         {/* Contenuto SCROLLABILE */}
         <div 
-          onScroll={handleScroll}
-          style={{
-            padding: '20px',
-            overflowY: 'auto',     // ← Scroll verticale
-            flex: '1',             // ← Si espande
-            fontSize: '13px',
-            lineHeight: '1.5'
-          }}
-        >
+  style={{ 
+    padding: '20px', 
+    fontSize: '14px', 
+    lineHeight: '1.6',
+    overflowY: 'auto',  // ← AGGIUNTO
+    maxHeight: '50vh',  // ← AGGIUNTO: massimo 50% dello schermo
+    flex: '1'           // ← AGGIUNTO
+  }}
+  onScroll={handleScroll}
+>
           <p style={{ marginBottom: '10px' }}>
             <strong>Finalità didattica ed educativa:</strong> I contenuti presentati in questa applicazione hanno esclusivamente scopo informativo ed educativo nell'ambito dell'educazione finanziaria. Non costituiscono in alcun modo consulenza finanziaria personalizzata, sollecitazione all'investimento o raccomandazione di prodotti finanziari specifici.
           </p>
