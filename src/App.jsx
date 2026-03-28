@@ -276,12 +276,14 @@ export default function PortafogliModello() {
 
           {/* Contenuto */}
           <div style={{ padding: '20px', fontSize: '14px', lineHeight: '1.6' }}>
-            <p><strong>Finalità didattica:</strong> Scopo informativo ed educativo. Non costituisce consulenza.</p>
-            <p><strong>Nessuna attività regolamentata:</strong> Non è consulente autorizzato.</p>
-            <p><strong>Portafogli teorici:</strong> Esempi didattici generici.</p>
-            <p><strong>Rendimenti ipotetici:</strong> Non garantiscono risultati futuri.</p>
-            <p><strong>Responsabilità:</strong> L'utente decide autonomamente.</p>
-          </div>
+            <p><strong>Finalità didattica ed educativa:</strong> I contenuti presentati in questa applicazione hanno esclusivamente scopo informativo ed educativo nell'ambito dell'educazione finanziaria. Non costituiscono in alcun modo consulenza finanziaria personalizzata, sollecitazione all'investimento o raccomandazione di prodotti finanziari specifici.</p>
+            <p><strong>Nessuna attività regolamentata:</strong> Pessoa non è un consulente finanziario autorizzato né presta servizi di investimento ai sensi del D.Lgs 58/1998 (TUF). Non gestiamo capitali, non riceviamo commissioni da intermediari e non abbiamo conflitti di interesse nella presentazione dei portafogli modello.</p>
+            <p><strong>Portafogli modello teorici:</strong> Le allocazioni presentate sono esempi didattici a scopo illustrativo. Non tengono conto della tua situazione finanziaria personale, obiettivi, propensione al rischio, orizzonte temporale o vincoli specifici. </p>
+            <p><strong>Rendimenti ipotetici:</strong> I rendimenti indicati sono stime basate su dati storici e proiezioni teoriche. I rendimenti passati non sono indicativi di quelli futuri. Ogni investimento comporta rischi, inclusa la possibile perdita totale o parziale del capitale. </p>
+            <p><strong>Conformità volontaria:</strong> Pessoa si allinea volontariamente alle Linee Guida ESMA-Consob gennaio 2026 sulla comunicazione finanziaria,pur non essendo soggetto agli obblighi di legge previsti per gli intermediari autorizzati. </p> 
+            <p><strong>Responsabilità:</strong> L'utente è l'unico responsabile delle decisioni di investimento assunte. Pessoa non può essere ritenuta responsabile per eventuali perdite derivanti dall'utilizzo delle informazioni contenute in questa applicazione</p>
+            <p><strong>Raccomandazione:</strong> Prima di effettuare qualsiasi investimento, consulta un consulente finanziario abilitato che possa valutare la tua situazione specifica. Leggi sempre con attenzione la documentazione informativa degli strumenti finanziari (KIID, prospetto). </p> 
+        </div>
 
           {/* Pulsante */}
           <div style={{ padding: '20px', borderTop: '1px solid #eee' }}>
