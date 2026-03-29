@@ -119,11 +119,11 @@ const portfolios = [
     name: "Un po' cicala e un po' formica",
     subtitle: 'Risparmio flessibile, possibili prelievi',
     allocation: [
-      { name: 'Azionario diversificato', value: 60, color: COLORS.stocks },
-      { name: 'Obbligazionario', value: 40, color: COLORS.bonds }
+      { name: 'Azionario globale diversificato', value: 60, color: COLORS.stocks },
+      { name: 'Obbligazionario corto e intermedio', value: 40, color: COLORS.bonds }
     ],
     versionePigra: 'ETF tipo Life Strategy',
-    note: 'Allocazione fissa 60/40. Il classico bilanciato.'
+    note: 'Allocazione fissa 60/40. Il classico bilanciato. La composizione indicata è volutamente generica per privilegiare la semplicità dell\'allocazione, ma entrambi i comparti possono essere raffinati a seconda delle esigenze e la propensione al rischio personale.'
   },
   {
     id: 8,
@@ -303,6 +303,14 @@ export default function PortafogliModello() {
   }
 
   const SoccerField = () => {
+    const positions = {
+      portiere: [portfolios[0]],
+      difesa: portfolios.slice(1, 4),
+      centrocampo: portfolios.slice(4, 8),
+      attacco: portfolios.slice(8, 11)
+    };
+
+    // Lookup by id for precise field positioning
     const byId = (id) => portfolios.find(p => p.id === id);
 
     const PlayerCard = ({ portfolio, size = 'normal', overridePosition = null, overrideName = null }) => (
@@ -350,19 +358,14 @@ export default function PortafogliModello() {
         </div>
 
         <div className="relative space-y-8">
-          {/* PORTIERE */}
           <div className="flex justify-center">
-            <PlayerCard portfolio={byId(1)} />
+            <PlayerCard portfolio={positions.portiere[0]} />
           </div>
-
-          {/* DIFESA — ordine corretto: Centrale di destra (2) | Centrale (3) | Centrale di sinistra (4) */}
           <div className="flex justify-around px-4">
-            <PlayerCard portfolio={byId(2)} size="small" />
-            <PlayerCard portfolio={byId(3)} size="small" />
             <PlayerCard portfolio={byId(4)} size="small" />
+            <PlayerCard portfolio={byId(3)} size="small" />
+            <PlayerCard portfolio={byId(2)} size="small" />
           </div>
-
-          {/* CENTROCAMPO */}
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-center">
               <PlayerCard portfolio={byId(5)} size="small" overridePosition="Mediano" />
@@ -375,8 +378,6 @@ export default function PortafogliModello() {
               <PlayerCard portfolio={byId(8)} size="small" overridePosition="Trequartista" />
             </div>
           </div>
-
-          {/* ATTACCO */}
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-around w-full px-4">
               <PlayerCard portfolio={byId(9)} size="small" />
