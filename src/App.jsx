@@ -49,22 +49,8 @@ const portfolios = [
   {
     id: 3,
     category: 'DIFESA',
-    position: 'Centrale di sinistra',
-    positionNumber: 3,
-    name: 'Ma io veramente avrei comprato una casa',
-    subtitle: 'Flussi di cassa regolari, sostituto del mattone',
-    allocation: [
-      { name: 'Bond Euro 3-5Y Dist', value: 70, color: COLORS.bonds },
-      { name: 'Dividend Aristocrats Dist', value: 30, color: COLORS.dividends }
-    ],
-    versionePigra: 'REITs globali diversificati',
-    note: 'Flusso costante come una rendita da affitto + apprezzamento del patrimonio.'
-  },
-  {
-    id: 4,
-    category: 'DIFESA',
     position: 'Centrale',
-    positionNumber: 4,
+    positionNumber: 3,
     name: 'Non ci sono più le mezze stagioni',
     subtitle: 'All Weather',
     allocation: [
@@ -77,6 +63,20 @@ const portfolios = [
     ],
     versionePigra: '80% ETF tipo "Life Strategy" + 20% Commodities (approssimativo)',
     note: 'All Weather aggiornato.'
+  },
+  {
+    id: 4,
+    category: 'DIFESA',
+    position: 'Centrale di sinistra',
+    positionNumber: 4,
+    name: 'Ma io veramente avrei comprato una casa',
+    subtitle: 'Flussi di cassa regolari, sostituto del mattone',
+    allocation: [
+      { name: 'Bond Euro 3-5Y Dist', value: 70, color: COLORS.bonds },
+      { name: 'Dividend Aristocrats Dist', value: 30, color: COLORS.dividends }
+    ],
+    versionePigra: 'REITs globali diversificati',
+    note: 'Flusso costante come una rendita da affitto + apprezzamento del patrimonio.'
   },
   {
     id: 5,
@@ -98,19 +98,18 @@ const portfolios = [
   {
     id: 6,
     category: 'CENTROCAMPO',
-    position: 'Trequartista',
+    position: 'Regista',
     positionNumber: 6,
-    name: 'Chissà se ci andremo mai',
-    subtitle: 'Accumulo a lungo termine tipo pensione alternativa',
+    name: "L'ombrellone",
+    subtitle: 'De-cumulo pianificato per godersi il presente',
     allocation: [
-      { name: 'MSCI World', value: 50, color: COLORS.stocks },
-      { name: 'Small Cap', value: 15, color: COLORS.momentum },
-      { name: 'Emerging Markets', value: 10, color: COLORS.stocks },
-      { name: 'Bond Corti 1-3Y', value: 20, color: COLORS.bonds },
-      { name: 'Oro', value: 5, color: COLORS.gold }
+      { name: 'Contanti (2 anni di spese)', value: 20, color: COLORS.cash },
+      { name: 'Bond Ladder Dist (prossimi 5 anni)', value: 30, color: COLORS.bonds },
+      { name: 'MSCI World Volatilità Minima', value: 25, color: COLORS.lowVol },
+      { name: 'High Dividend Yield Dist', value: 25, color: COLORS.dividends }
     ],
-    versionePigra: 'ETF tipo Life Path a scadenza 30/40 anni',
-    note: 'Allocazione iniziale. Il Sequence of Returns Risk richiede de-risking con riduzione di azioni e aumento bond progressivo. Oro 5% costante per protezione crisi durante accumulo.'
+    versionePigra: null,
+    note: 'Equity Income: 50% azionario low vol + high dividend per protezione drawdown e cash flow. Bond ladder con scadenze distribuite per ricostituire liquidità automaticamente. Diminuisce il Sequence of Returns Risk.'
   },
   {
     id: 7,
@@ -129,18 +128,19 @@ const portfolios = [
   {
     id: 8,
     category: 'CENTROCAMPO',
-    position: 'Regista',
+    position: 'Trequartista',
     positionNumber: 8,
-    name: "L'ombrellone",
-    subtitle: 'De-cumulo pianificato per godersi il presente',
+    name: 'Chissà se ci andremo mai',
+    subtitle: 'Accumulo a lungo termine tipo pensione alternativa',
     allocation: [
-      { name: 'Contanti (2 anni di spese)', value: 20, color: COLORS.cash },
-      { name: 'Bond Ladder Dist (prossimi 5 anni)', value: 30, color: COLORS.bonds },
-      { name: 'MSCI World Volatilità Minima', value: 25, color: COLORS.lowVol },
-      { name: 'High Dividend Yield Dist', value: 25, color: COLORS.dividends }
+      { name: 'MSCI World', value: 50, color: COLORS.stocks },
+      { name: 'Small Cap', value: 15, color: COLORS.momentum },
+      { name: 'Emerging Markets', value: 10, color: COLORS.stocks },
+      { name: 'Bond Corti 1-3Y', value: 20, color: COLORS.bonds },
+      { name: 'Oro', value: 5, color: COLORS.gold }
     ],
-    versionePigra: null,
-    note: 'Equity Income: 50% azionario low vol + high dividend per protezione drawdown e cash flow. Bond ladder con scadenze distribuite per ricostituire liquidità automaticamente. Diminuisce il Sequence of Returns Risk.'
+    versionePigra: 'ETF tipo Life Path a scadenza 30/40 anni',
+    note: 'Allocazione iniziale. Il Sequence of Returns Risk richiede de-risking con riduzione di azioni e aumento bond progressivo. Oro 5% costante per protezione crisi durante accumulo.'
   },
   {
     id: 9,
@@ -162,8 +162,21 @@ const portfolios = [
   {
     id: 10,
     category: 'ATTACCO',
-    position: 'Ala Sinistra',
+    position: 'Centravanti',
     positionNumber: 10,
+    name: "Cent'anni",
+    subtitle: 'Massimizzazione patrimonio, buy & hold purista',
+    allocation: [
+      { name: 'MSCI World / FTSE All-World', value: 100, color: COLORS.stocks }
+    ],
+    versionePigra: null,
+    note: 'Potenza pura. Obiettivo: massimo capitale possibile a lungo termine. La strategia più semplice ed efficace.'
+  },
+  {
+    id: 11,
+    category: 'ATTACCO',
+    position: 'Ala Sinistra',
+    positionNumber: 11,
     name: 'Voglia di lavorare',
     subtitle: 'Cash flow perpetuo',
     allocation: [
@@ -174,19 +187,6 @@ const portfolios = [
     ],
     versionePigra: null,
     note: 'Focus su distribuzione di reddito passivo a discapito della crescita del patrimonio.'
-  },
-  {
-    id: 11,
-    category: 'ATTACCO',
-    position: 'Centravanti',
-    positionNumber: 11,
-    name: "Cent'anni",
-    subtitle: 'Massimizzazione patrimonio, buy & hold purista',
-    allocation: [
-      { name: 'MSCI World / FTSE All-World', value: 100, color: COLORS.stocks }
-    ],
-    versionePigra: null,
-    note: 'Potenza pura. Obiettivo: massimo capitale possibile a lungo termine. La strategia più semplice ed efficace.'
   }
 ];
 
@@ -359,29 +359,29 @@ export default function PortafogliModello() {
             <PlayerCard portfolio={positions.portiere[0]} />
           </div>
           <div className="flex justify-around px-4">
-            <PlayerCard portfolio={positions.difesa[0]} size="small" />
-            <PlayerCard portfolio={positions.difesa[2]} size="small" overridePosition="Centrale" />
+            <PlayerCard portfolio={positions.difesa[2]} size="small" />
             <PlayerCard portfolio={positions.difesa[1]} size="small" />
+            <PlayerCard portfolio={positions.difesa[0]} size="small" />
           </div>
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-center">
               <PlayerCard portfolio={positions.centrocampo[0]} size="small" overridePosition="Mediano" />
             </div>
             <div className="flex justify-around w-full px-4">
-              <PlayerCard portfolio={positions.centrocampo[3]} size="small" overridePosition="Regista" />
+              <PlayerCard portfolio={positions.centrocampo[1]} size="small" overridePosition="Regista" />
               <PlayerCard portfolio={positions.centrocampo[2]} size="small" />
             </div>
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.centrocampo[1]} size="small" overridePosition="Trequartista" />
+              <PlayerCard portfolio={positions.centrocampo[3]} size="small" overridePosition="Trequartista" />
             </div>
           </div>
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-around w-full px-4">
               <PlayerCard portfolio={positions.attacco[0]} size="small" />
-              <PlayerCard portfolio={positions.attacco[1]} size="small" />
+              <PlayerCard portfolio={positions.attacco[2]} size="small" />
             </div>
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.attacco[2]} size="small" />
+              <PlayerCard portfolio={positions.attacco[1]} size="small" />
             </div>
           </div>
         </div>
