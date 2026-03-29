@@ -26,16 +26,16 @@ const portfolios = [
     name: 'Sotto il materasso',
     subtitle: 'Estremo difensore - massima protezione',
     allocation: [
-      { name: 'Bond Gov Brevi 1-3Y', value: 50, color: COLORS.bonds },
+      { name: 'Bond Governativi Brevi 1-3Y', value: 50, color: COLORS.bonds },
       { name: 'Oro Fisico', value: 25, color: COLORS.gold },
-      { name: 'Cash/Monetario', value: 25, color: COLORS.cash }
+      { name: 'Contanti/ETF monetario', value: 25, color: COLORS.cash }
     ],
     note: 'Protezione contro crisi sistemiche e traumi finanziari. Dormo tra due guanciali.'
   },
   {
     id: 2,
     category: 'DIFESA',
-    position: 'Difensore Centrale',
+    position: 'Centrale di destra',
     positionNumber: 2,
     name: 'Io ce li ho sul libretto',
     subtitle: 'Zero pensieri, massima semplicità',
@@ -44,39 +44,39 @@ const portfolios = [
       { name: 'Oro Fisico', value: 20, color: COLORS.gold }
     ],
     versionePigra: null,
-    note: 'Solidità pura con protezione extra che i vecchi libretti non avevano'
+    note: 'Solidità pura con protezione extra che i libretti non hanno (oro).'
   },
   {
     id: 3,
     category: 'DIFESA',
-    position: 'Terzino Destro',
+    position: 'Centrale di sinistra',
     positionNumber: 3,
     name: 'Ma io veramente avrei comprato una casa',
     subtitle: 'Flussi di cassa regolari, sostituto del mattone',
     allocation: [
       { name: 'Bond Euro 3-5Y Dist', value: 70, color: COLORS.bonds },
-      { name: 'Dividend Aristocrats', value: 30, color: COLORS.dividends }
+      { name: 'Dividend Aristocrats Dist', value: 30, color: COLORS.dividends }
     ],
-    versionePigra: 'REIT globali diversificati',
-    note: 'Flusso costante come una rendita da affitto'
+    versionePigra: 'REITs globali diversificati',
+    note: 'Flusso costante come una rendita da affitto + apprezzamento del patrimonio.'
   },
   {
     id: 4,
     category: 'DIFESA',
-    position: 'Terzino Sinistro',
+    position: 'Centrale',
     positionNumber: 4,
     name: 'Non ci sono più le mezze stagioni',
-    subtitle: 'All Weather v2.2 - Il mediano corazzato definitivo',
+    subtitle: 'All Weather',
     allocation: [
-      { name: 'World Quality (IWQU)', value: 30, color: COLORS.quality },
+      { name: 'World Quality', value: 30, color: COLORS.quality },
       { name: 'Bond Lunghi 20-30Y', value: 20, color: COLORS.bondLong },
       { name: 'Bond Corti 1-3Y', value: 20, color: COLORS.bonds },
       { name: 'Oro', value: 15, color: COLORS.gold },
       { name: 'Commodities', value: 10, color: COLORS.commodities },
       { name: 'REITs', value: 5, color: COLORS.reit }
     ],
-    versionePigra: '80% Vanguard LifeStrategy 40% + 20% Commodities (approssimativo)',
-    note: 'v2.2 Barbell + Gold Heavy: Barbell bonds puro (20% lunghi + 20% corti, ZERO intermedi). Quality per crescita resiliente. Hard assets 30% (15% oro + 10% commodities + 5% REIT) = corazza reale contro inflazione.'
+    versionePigra: '80% ETF tipo "Life Strategy" + 20% Commodities (approssimativo)',
+    note: 'All Weather aggiornato.'
   },
   {
     id: 5,
@@ -92,7 +92,7 @@ const portfolios = [
       { name: 'Bond Intermedi 5-7Y', value: 20, color: COLORS.bonds },
       { name: 'Oro', value: 10, color: COLORS.gold }
     ],
-    versionePigra: 'iShares World Quality + iShares Global Aggregate Bond + Oro',
+    versionePigra: 'World Quality + ETF tipo Global Aggregate Bond + Oro',
     note: 'Il ponte tra difesa e centrocampo. Quality + Dividend per crescita difensiva, barbell bonds (30% corti + 20% intermedi) per flessibilità, oro 10% per protezione.'
   },
   {
@@ -118,29 +118,29 @@ const portfolios = [
     position: 'Mezzala',
     positionNumber: 7,
     name: "Un po' cicala e un po' formica",
-    subtitle: 'Risparmio flessibile, possibili prelievi 3-10 anni',
+    subtitle: 'Risparmio flessibile, possibili prelievi',
     allocation: [
-      { name: 'Azionario Globale', value: 60, color: COLORS.stocks },
+      { name: 'Azionario diversificato', value: 60, color: COLORS.stocks },
       { name: 'Obbligazionario', value: 40, color: COLORS.bonds }
     ],
-    versionePigra: 'Vanguard LifeStrategy 60%',
-    note: 'Allocazione FISSA 60/40 (no de-risking). Il classico bilanciato.'
+    versionePigra: 'ETF tipo Life Strategy',
+    note: 'Allocazione FISSA 60/40. Il classico bilanciato.'
   },
   {
     id: 8,
     category: 'CENTROCAMPO',
-    position: 'Trequartista',
+    position: 'Regista',
     positionNumber: 8,
     name: "L'ombrellone",
     subtitle: 'De-cumulo pianificato per godersi il presente',
     allocation: [
-      { name: 'Cash (2 anni spese)', value: 20, color: COLORS.cash },
-      { name: 'Bond Ladder 2026-2030', value: 30, color: COLORS.bonds },
-      { name: 'MSCI World Min Vol', value: 25, color: COLORS.lowVol },
-      { name: 'High Dividend Yield', value: 25, color: COLORS.dividends }
+      { name: 'Contanti (2 anni di spese)', value: 20, color: COLORS.cash },
+      { name: 'Bond Ladder Dist (prossimi 5 anni)', value: 30, color: COLORS.bonds },
+      { name: 'MSCI World Volatilità Minima', value: 25, color: COLORS.lowVol },
+      { name: 'High Dividend Yield Dist', value: 25, color: COLORS.dividends }
     ],
     versionePigra: null,
-    note: 'Equity Income: 50% low vol + 50% high dividend per protezione drawdown e cash flow. Bond ladder con scadenze distribuite (iBonds 2026-2030) ricostituisce cash automaticamente. Elimina Sequence of Returns Risk.'
+    note: 'Equity Income: 50% azionario low vol + high dividend per protezione drawdown e cash flow. Bond ladder con scadenze distribuite per ricostituire liquidità automaticamente. Diminuisce il Sequence of Returns Risk.'
   },
   {
     id: 9,
@@ -617,8 +617,7 @@ export default function PortafogliModello() {
           <div>
             <h3 className="mb-3 font-semibold text-gray-800">Disclaimer</h3>
             <p>
-              I rendimenti storici citati sono calcolati su serie storiche pubbliche e non costituiscono garanzia
-              di risultati futuri. I modelli presentati hanno finalità didattica e illustrativa. L'investitore è
+              Il profilo di rischio associato alle posizioni in campo si riferisce a rendimenti e drawdown medi calcolati su serie storiche pubbliche e non costituiscono garanzia di risultati futuri. I modelli presentati hanno finalità didattica e illustrativa. L'investitore è
               responsabile della propria asset allocation e della selezione degli strumenti finanziari.
             </p>
           </div>
