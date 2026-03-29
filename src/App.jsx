@@ -98,10 +98,10 @@ const portfolios = [
   {
     id: 6,
     category: 'CENTROCAMPO',
-    position: 'Regista',
+    position: 'Trequartista',
     positionNumber: 6,
     name: 'Chissà se ci andremo mai',
-    subtitle: 'Accumulo pensionistico 20-40 anni con de-risking automatico',
+    subtitle: 'Accumulo a lungo termine tipo pensione alternativa',
     allocation: [
       { name: 'MSCI World', value: 50, color: COLORS.stocks },
       { name: 'Small Cap', value: 15, color: COLORS.momentum },
@@ -109,8 +109,8 @@ const portfolios = [
       { name: 'Bond Corti 1-3Y', value: 20, color: COLORS.bonds },
       { name: 'Oro', value: 5, color: COLORS.gold }
     ],
-    versionePigra: 'iShares LifePath 2055/2060 (senza oro, de-risking automatico)',
-    note: 'Allocazione iniziale per giovani. De-risking automatico riduce azioni e aumenta bond con l\'età. Oro 5% costante per protezione crisi durante accumulo.'
+    versionePigra: 'ETF tipo Life Path a scadenza 30/40 anni',
+    note: 'Allocazione iniziale. Il Sequence of Returns Risk richiede de-risking con riduzione di azioni e aumento bond progressivo. Oro 5% costante per protezione crisi durante accumulo.'
   },
   {
     id: 7,
@@ -148,7 +148,7 @@ const portfolios = [
     position: 'Ala Destra',
     positionNumber: 9,
     name: 'Il fenomeno',
-    subtitle: 'Ricerca alpha attraverso fattori accademici',
+    subtitle: 'Se proprio vogliamo provare a battere il mercato',
     allocation: [
       { name: 'Obbligazionario', value: 20, color: COLORS.bonds },
       { name: 'Momentum Factor', value: 25, color: COLORS.momentum },
@@ -156,8 +156,8 @@ const portfolios = [
       { name: 'Dividend Aristocrats', value: 25, color: COLORS.dividends },
       { name: 'Oro', value: 5, color: COLORS.gold }
     ],
-    versionePigra: 'iShares Edge MSCI World Multifactor + Bond + Oro',
-    note: 'Tre fattori equilibrati (Momentum, Quality, Dividend) con base obbligazionaria e oro per stabilità. Ricerca sovraperformance con rischio controllato.'
+    versionePigra: 'MSCI World Multifactor + Bond + Oro',
+    note: 'Tre fattori equilibrati (Momentum, Quality, Dividend) con base obbligazionaria e oro per stabilità. Ricerca sovraperformance e resilienza.'
   },
   {
     id: 10,
@@ -165,15 +165,15 @@ const portfolios = [
     position: 'Ala Sinistra',
     positionNumber: 10,
     name: 'Voglia di lavorare',
-    subtitle: 'Cash flow perpetuo, pensionamento anticipato',
+    subtitle: 'Cash flow perpetuo',
     allocation: [
-      { name: 'Renta Fija', value: 30, color: COLORS.bonds },
-      { name: 'Dividend Aristocrats', value: 30, color: COLORS.dividends },
-      { name: 'High Yield', value: 25, color: COLORS.highYield },
+      { name: 'Obbligazionario', value: 30, color: COLORS.bonds },
+      { name: 'Dividend Aristocrats Dist', value: 30, color: COLORS.dividends },
+      { name: 'High Yield Dist', value: 25, color: COLORS.highYield },
       { name: 'Momentum', value: 15, color: COLORS.momentum }
     ],
     versionePigra: null,
-    note: 'Focus su distribuzione di reddito passivo. Cash flow > capital gain.'
+    note: 'Focus su distribuzione di reddito passivo a discapito della crescita del patrimonio.'
   },
   {
     id: 11,
@@ -181,12 +181,12 @@ const portfolios = [
     position: 'Centravanti',
     positionNumber: 11,
     name: "Cent'anni",
-    subtitle: 'Massimizzazione patrimonio eredità, buy & hold purista',
+    subtitle: 'Massimizzazione patrimonio, buy & hold purista',
     allocation: [
-      { name: 'MSCI World / VWCE', value: 100, color: COLORS.stocks }
+      { name: 'MSCI World / FTSE All-World', value: 100, color: COLORS.stocks }
     ],
     versionePigra: null,
-    note: 'Potenza pura. Obiettivo: massimo capitale finale per eredità. La strategia più semplice ed efficace.'
+    note: 'Potenza pura. Obiettivo: massimo capitale possibile a lungo termine. La strategia più semplice ed efficace.'
   }
 ];
 
@@ -359,9 +359,9 @@ export default function PortafogliModello() {
             <PlayerCard portfolio={positions.portiere[0]} />
           </div>
           <div className="flex justify-around px-4">
-            <PlayerCard portfolio={positions.difesa[1]} size="small" overridePosition="Centrale di sinistra" />
+            <PlayerCard portfolio={positions.difesa[0]} size="small" />
             <PlayerCard portfolio={positions.difesa[2]} size="small" overridePosition="Centrale" />
-            <PlayerCard portfolio={positions.difesa[0]} size="small" overridePosition="Centrale di destra" />
+            <PlayerCard portfolio={positions.difesa[1]} size="small" />
           </div>
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-center">
