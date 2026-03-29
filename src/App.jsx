@@ -303,12 +303,7 @@ export default function PortafogliModello() {
   }
 
   const SoccerField = () => {
-    const positions = {
-      portiere: [portfolios[0]],
-      difesa: portfolios.slice(1, 4),
-      centrocampo: portfolios.slice(4, 8),
-      attacco: portfolios.slice(8, 11)
-    };
+    const byId = (id) => portfolios.find(p => p.id === id);
 
     const PlayerCard = ({ portfolio, size = 'normal', overridePosition = null, overrideName = null }) => (
       <div
@@ -355,33 +350,40 @@ export default function PortafogliModello() {
         </div>
 
         <div className="relative space-y-8">
+          {/* PORTIERE */}
           <div className="flex justify-center">
-            <PlayerCard portfolio={positions.portiere[0]} />
+            <PlayerCard portfolio={byId(1)} />
           </div>
+
+          {/* DIFESA — ordine corretto: Centrale di destra (2) | Centrale (3) | Centrale di sinistra (4) */}
           <div className="flex justify-around px-4">
-            <PlayerCard portfolio={positions.difesa[2]} size="small" />
-            <PlayerCard portfolio={positions.difesa[1]} size="small" />
-            <PlayerCard portfolio={positions.difesa[0]} size="small" />
+            <PlayerCard portfolio={byId(2)} size="small" />
+            <PlayerCard portfolio={byId(3)} size="small" />
+            <PlayerCard portfolio={byId(4)} size="small" />
           </div>
+
+          {/* CENTROCAMPO */}
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.centrocampo[0]} size="small" overridePosition="Mediano" />
+              <PlayerCard portfolio={byId(5)} size="small" overridePosition="Mediano" />
             </div>
             <div className="flex justify-around w-full px-4">
-              <PlayerCard portfolio={positions.centrocampo[1]} size="small" overridePosition="Regista" />
-              <PlayerCard portfolio={positions.centrocampo[2]} size="small" />
+              <PlayerCard portfolio={byId(6)} size="small" overridePosition="Regista" />
+              <PlayerCard portfolio={byId(7)} size="small" />
             </div>
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.centrocampo[3]} size="small" overridePosition="Trequartista" />
+              <PlayerCard portfolio={byId(8)} size="small" overridePosition="Trequartista" />
             </div>
           </div>
+
+          {/* ATTACCO */}
           <div className="flex flex-col items-center gap-2">
             <div className="flex justify-around w-full px-4">
-              <PlayerCard portfolio={positions.attacco[0]} size="small" />
-              <PlayerCard portfolio={positions.attacco[2]} size="small" />
+              <PlayerCard portfolio={byId(9)} size="small" />
+              <PlayerCard portfolio={byId(11)} size="small" />
             </div>
             <div className="flex justify-center">
-              <PlayerCard portfolio={positions.attacco[1]} size="small" />
+              <PlayerCard portfolio={byId(10)} size="small" />
             </div>
           </div>
         </div>
