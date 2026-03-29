@@ -124,7 +124,7 @@ const portfolios = [
       { name: 'Obbligazionario', value: 40, color: COLORS.bonds }
     ],
     versionePigra: 'ETF tipo Life Strategy',
-    note: 'Allocazione FISSA 60/40. Il classico bilanciato.'
+    note: 'Allocazione fissa 60/40. Il classico bilanciato.'
   },
   {
     id: 8,
