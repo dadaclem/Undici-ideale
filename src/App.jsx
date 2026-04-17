@@ -636,10 +636,9 @@ export default function PortafogliModello() {
                 erodendo il vantaggio; (2) <strong>Rendimento reale più basso</strong> - se l'inflazione resta moderata,
                 il rendimento totale è inferiore ai bond nominali; (3) <strong>Maggiore volatilità</strong> - i prezzi si muovono
                 in base alle aspettative di inflazione futura; (4) <strong>Duration più lunga</strong> - tipicamente 7-15 anni
-                vs 3-5 anni dei bond corti. Per protezione inflazione reale preferiamo commodities, oro e REIT nei portafogli
-                che lo richiedono (es. "Non ci sono più le mezze stagioni"); (5) <strong>Liquidità inferiore</strong> - i bond inflation-linked 
-                hanno un mercato secondario meno profondo con spread bid-ask più ampi. Per protezione inflazione preferiamo hard assets che 
-                offrono diversificazione aggiuntiva e possono essere gestiti indipendentemente come commodities, oro e REIT.
+                vs 3-5 anni dei bond corti. Per protezione inflazione preferiamo hard assets che offrono diversificazione aggiuntiva 
+                e possono essere gestiti indipendentemente come commodities, oro e REIT.; (5) <strong>Liquidità inferiore</strong> - i 
+                bond inflation-linked hanno un mercato secondario meno profondo con spread bid-ask più ampi. 
               </p>
             </div>
 
