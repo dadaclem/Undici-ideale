@@ -629,15 +629,17 @@ export default function PortafogliModello() {
             <h3 className="mb-3 font-semibold text-gray-800">Note Metodologiche</h3>
 
             <div className="mb-3">
-              <h4 className="font-semibold text-gray-700">¹ Perché bond a breve scadenza (3-5 anni) e non inflation-linked?</h4>
+              <h4 className="font-semibold text-gray-700">¹ Perché non usiamo bond inflation-linked come i BTP Italia?</h4>
               <p className="mt-1">
-                Gli inflation-linked bonds (TIPS europei) presentano svantaggi significativi per investitori italiani:
-                (1) <strong>Tassazione penalizzante</strong> - si paga il 26% sia sul coupon reale che sull'aggiustamento inflazione annuale,
+                Gli inflation-linked bonds presentano svantaggi significativi:
+                (1) <strong>Tassazione</strong> - si paga il 12,5% sia sul coupon reale che sull'aggiustamento inflazione annuale,
                 erodendo il vantaggio; (2) <strong>Rendimento reale più basso</strong> - se l'inflazione resta moderata,
                 il rendimento totale è inferiore ai bond nominali; (3) <strong>Maggiore volatilità</strong> - i prezzi si muovono
                 in base alle aspettative di inflazione futura; (4) <strong>Duration più lunga</strong> - tipicamente 7-15 anni
                 vs 3-5 anni dei bond corti. Per protezione inflazione reale preferiamo commodities, oro e REIT nei portafogli
-                che lo richiedono (es. "Non ci sono più le mezze stagioni").
+                che lo richiedono (es. "Non ci sono più le mezze stagioni"); (5) <strong>Liquidità inferiore<strong> - i bond inflation-linked 
+                hanno un mercato secondario meno profondo con spread bid-ask più ampi. Per protezione inflazione preferiamo hard assets che 
+                offrono diversificazione aggiuntiva e possono essere gestiti indipendentemente come commodities, oro e REIT.
               </p>
             </div>
 
